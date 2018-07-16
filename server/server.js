@@ -13,5 +13,5 @@
 //   Período : Julio 2018
 // ===========================================================================
 
-require('./config/config.js');
-require('./server/express.js');
+require('../config/config.js'); // Cargo seteos de la aplicación
+require('./express.js'); // Seteo los servicios
