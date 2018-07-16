@@ -20,6 +20,8 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+app.use(express.static(__dirname + '/public')); // se define un Middleware general
+
 app.use(bodyParser.urlencoded({ extended: false })) // Convierte la URL en formato correcto
 app.use(bodyParser.json()); // Convierte el Body en un formato JSON
 
