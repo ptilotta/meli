@@ -1,8 +1,5 @@
 const express = require('express');
 const ADN = require('../models/adn.js');
-const bcrypt = require('bcrypt');
-const _ = require('underscore');
-
 const app = express();
 
 
