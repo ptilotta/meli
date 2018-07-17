@@ -91,6 +91,16 @@ app.post('/mutant', function(req, res) {
         adn: matriz.dna,
         mutante: mutante
     });
+
+    dna.save((err, dnaDB) => {
+        if (err) {
+            return res.status(400).json({
+                err
+            });
+        }
+        console.log(dnaDB);
+    })
+
     if (mutante) {
         return res.status(200).json();
     } else {

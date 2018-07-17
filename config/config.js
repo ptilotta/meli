@@ -12,12 +12,17 @@ process.env.PORT = process.env.PORT || 3000;
 
 const mongoose = require('mongoose');
 
+process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
+
 let urlDB;
 
 urlDB = process.env.MongoURI;
 process.env.URLDB = urlDB;
 
-mongoose.connect(process.env.URLDB, { useNewUrlParser: true }, (err, res) => {
-    if (err) throw err;
-    console.log('Base de Datos ONLINE');
-})
+if (!process.env.NODE_ENV === 'dev') {
+
+    mongoose.connect(process.env.URLDB, { useNewUrlParser: true }, (err, res) => {
+        if (err) throw err;
+        console.log('Base de Datos ONLINE');
+    })
+};
