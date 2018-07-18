@@ -92,7 +92,7 @@ app.post('/mutant', function(req, res) {
         mutante: mutante
     });
 
-    dna.save((err, dnaDB) => {
+    adn.save((err, dnaDB) => {
         if (err) {
             return res.status(400).json({
                 err
