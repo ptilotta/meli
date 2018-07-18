@@ -108,5 +108,6 @@ app.post('/mutant', function(req, res) {
     }
 });
 
-app.use(express.static(path.join(__dirname, '../public')));
+const publicPath = path.resolve(__dirname, '../public');
+app.use(express.static(publicPath));
 module.exports = app;
