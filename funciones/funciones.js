@@ -5,7 +5,7 @@
 function chequeoLongitud(tabla) {
     let longitudElemento = 0;
     let longitud = 0;
-    let caracteres = '"{}';
+    let caracteres = "\"{}";
 
     for (let i = 0; i < tabla.length; i++) {
         tabla[i] = tabla[i].replace(new RegExp(caracteres, 'g'), '');
@@ -25,7 +25,7 @@ function chequeoLongitud(tabla) {
 
 function chequeoLetrasValidas(tabla) {
     patron = "AGCT";
-    let caracteres = '"{}';
+    let caracteres = "\"{}";
 
     for (var i = 0; i < tabla.length; i++) {
         tabla[i] = tabla[i].replace(new RegExp(caracteres, 'g'), '');
