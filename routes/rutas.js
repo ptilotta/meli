@@ -14,6 +14,7 @@ app.get('/stats', function(req, res) {
     let mutantes = 0;
     let todos = 0;
 
+    console.log('comenzó STATS');
     // Calculo los HUMANOS 
 
     ADN.find({ mutante: false }).countDocuments((err, conteo) => {
@@ -22,6 +23,7 @@ app.get('/stats', function(req, res) {
         } else {
             humanos = conteo;
         }
+        console.log(`Primer COUNT humanos = ${humanos}`);
     });
 
     // Calculo los MUTANTES 
@@ -32,6 +34,7 @@ app.get('/stats', function(req, res) {
         } else {
             mutantes = conteo;
         }
+        console.log(`Segundo COUNT mutantes = ${mutantes}`);
     });
 
     // Preparo mensaje JSON con la respuesta 
@@ -50,6 +53,7 @@ app.get('/stats', function(req, res) {
             'ratio': `${ mutantes }`
         }
     }
+    console.log('finalizó STATS');
     return res.json(mensaje);
 });
 //-----------------------------------------------------------------
