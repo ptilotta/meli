@@ -93,6 +93,8 @@ app.post('/mutant', function(req, res) {
         mutante: mutante
     });
 
+    console.log(`adn = ${adn} y mutante = ${mutante}`);
+
     adn.save((err, dnaDB) => {
         if (err) {
             console.log('Hubo error en MONGODB', err);
