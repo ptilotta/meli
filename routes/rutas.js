@@ -91,13 +91,17 @@ app.post('/mutant', function(req, res) {
 
     adn.save((err, dnaDB) => {
         if (err) {
-            if (!err.includes("adn debe de ser único")) {
-                console.log('Hubo error en MONGODB', err);
-                return res.status(400).json({
-                    err
-                });
-            }
+            console.log('================================');
+            console.log('ERR');
+            console.log('================================');
+            console.log(err);
+            //           if (!err.includes("adn debe de ser único")) {
+            console.log('Hubo error en MONGODB', err);
+            return res.status(400).json({
+                err
+            });
         }
+        //       }
     });
 
     if (mutante) {
