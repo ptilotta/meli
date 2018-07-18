@@ -6,6 +6,8 @@ function chequeoLongitud(tabla) {
     var longitudElemento = 0;
     var longitud = 0;
     for (let i = 0; i < tabla.length; i++) {
+        tabla[i] = tabla[i].replace('{', '');
+        tabla[i] = tabla[i].replace('""', '');
         console.log(tabla[i]);
         longitud = tabla[i].length;
         if (i === 0) {
@@ -24,6 +26,8 @@ function chequeoLongitud(tabla) {
 function chequeoLetrasValidas(tabla) {
     patron = "AGCT";
     for (var i = 0; i < tabla.length; i++) {
+        tabla[i] = tabla[i].replace('{', '');
+        tabla[i] = tabla[i].replace('""', '');
         let registro = tabla[i];
         for (var ind = 1; ind <= registro.length; ind++) {
             letra = registro.substr(ind, 1).toUpperCase();
