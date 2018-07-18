@@ -87,14 +87,15 @@ app.post('/mutant', function(req, res) {
     }
 
     mutante = funciones.isMutant(tabla);
-    console.log('Ahora a grabar en MongoDB');
+
+    // Graba registro en MongoDB
+
     let adn = new ADN({
         adn: matriz.dna,
         mutante: mutante
     });
 
-    console.log(`adn = ${adn} y mutante = ${mutante}`);
-
+    console.log(ADN);
     adn.save((err, dnaDB) => {
         if (err) {
             console.log('Hubo error en MONGODB', err);
@@ -103,8 +104,9 @@ app.post('/mutant', function(req, res) {
             });
         }
         console.log(dnaDB);
-    })
+    });
 
+    console.log('Despues de Grabar Mongo');
     if (mutante) {
         return res.status(200).json();
     } else {
