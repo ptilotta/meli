@@ -93,11 +93,9 @@ app.post('/mutant', function(req, res) {
         if (err) {
             console.log(`ValidationError ${err.ValidationError}`);
             let mensajeError = err.ValidationError;
-            if (mensajeError.includes("adn debe de ser único")) {} else {
-                console.log('Hubo error en MONGODB', err);
-                return res.status(400).json({ err });
-            }
-            console.log(err);
+            console.log(`mensajeError = ${mensajeError}`);
+            console.log('Hubo error en MONGODB', err);
+            return res.status(400).json({ err });
         }
     });
 
