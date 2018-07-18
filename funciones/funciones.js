@@ -6,6 +6,7 @@ function chequeoLongitud(tabla) {
     var longitudElemento = 0;
     var longitud = 0;
     for (let i = 0; i < tabla.length; i++) {
+        console.log(tabla[i]);
         longitud = tabla[i].length;
         if (i === 0) {
             longitudElemento = longitud;
