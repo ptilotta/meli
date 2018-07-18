@@ -91,8 +91,7 @@ app.post('/mutant', function(req, res) {
 
     adn.save((err, dnaDB) => {
         if (err) {
-            console.log(`errors.adn.ValidatorError ${err.adn.ValidatorError}`);
-            console.log('Hubo error en MONGODB', err);
+            console.log('Hubo error en MONGODB', err.message);
             return res.status(400).json({ err });
         }
     });
