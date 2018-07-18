@@ -12,5 +12,7 @@ urlDB = process.env.MongoURI;
 process.env.URLDB = urlDB;
 
 mongoose.connect(process.env.URLDB, { useNewUrlParser: true }, (err, res) => {
-    if (err) throw err;
+    if (err) {
+        throw err
+    };
 })
