@@ -19,9 +19,10 @@ let urlDB;
 urlDB = process.env.MongoURI;
 process.env.URLDB = urlDB;
 
+console.log('Antes de Connect de Mongoose');
 if (!process.env.NODE_ENV === 'dev') {
 
-    console.log('Antes de Connect de Mongoose');
+    console.log('Dentro de Connect de Mongoose');
     mongoose.connect(process.env.URLDB, { useNewUrlParser: true }, (err, res) => {
         if (err) throw err;
         console.log('Base de Datos ONLINE');
