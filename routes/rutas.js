@@ -10,32 +10,26 @@ const app = express();
 //-----------------------------------------------------------------
 app.get('/stats', function(req, res) {
 
-    console.log("Inicio");
     let humanos = 0;
     let mutantes = 0;
     let todos = 0;
 
     // Calculo los HUMANOS 
 
-    ADN.find({ mutante: false }).count((err, conteo) => {
+    ADN.find({ mutante: false }).countDocuments((err, conteo) => {
         if (err) {
-            console.log(`hubo error ${err}`);
             humanos = 0;
         } else {
-            console.log('NO HUBO ERROR !');
             humanos = conteo;
         }
     });
 
     // Calculo los MUTANTES 
 
-    ADN.find({ mutante: true }).count((err, conteo) => {
-        console.log("Inicio");
+    ADN.find({ mutante: true }).countDocuments((err, conteo) => {
         if (err) {
-            console.log(`hubo error ${err}`);
             mutantes = 0;
         } else {
-            console.log('NO HUBO ERROR !');
             mutantes = conteo;
         }
     });
@@ -103,10 +97,8 @@ app.post('/mutant', function(req, res) {
                 err
             });
         }
-        console.log(dnaDB);
     });
 
-    console.log('Despues de Grabar Mongo');
     if (mutante) {
         return res.status(200).json();
     } else {

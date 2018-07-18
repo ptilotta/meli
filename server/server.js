@@ -14,4 +14,5 @@
 // ===========================================================================
 
 require('../config/config.js'); // Cargo seteos de la aplicación
+require('./mongo.js'); // conecto a la Base de Datos MongoDB
 require('./express.js'); // Seteo los servicios

@@ -50,7 +50,7 @@ function isMutant(dna) {
         if (checkMutante(t)) { camposMutantes++ };
     }
     console.log(`Campos Mutantes : ${camposMutantes}\n`);
-    //if (camposMutantes > 1) { return true };
+    if (camposMutantes > 1) { return true };
 
     // Chequeo Vertical
 
@@ -66,7 +66,7 @@ function isMutant(dna) {
     }
 
     console.log(`Campos Mutantes : ${camposMutantes}\n`);
-    //if (camposMutantes > 1) { return true };
+    if (camposMutantes > 1) { return true };
 
     //  si la matriz no supera las 4 filas, no tendrá nunca 4 casilleros en diagonal
 
@@ -93,7 +93,7 @@ function isMutant(dna) {
         }
 
         console.log(`Campos Mutantes : ${camposMutantes}\n`);
-        //    if (camposMutantes > 1) { return true };
+        if (camposMutantes > 1) { return true };
 
 
 
@@ -117,7 +117,7 @@ function isMutant(dna) {
         }
 
         console.log(`Campos Mutantes : ${camposMutantes}\n`);
-        //    if (camposMutantes > 1) { return true };
+        if (camposMutantes > 1) { return true };
 
 
         // ================================ Recorrido Derecha a Izquierda =============================
@@ -140,7 +140,7 @@ function isMutant(dna) {
         }
 
         console.log(`Campos Mutantes : ${camposMutantes}\n`);
-        //    if (camposMutantes > 1) { return true };
+        if (camposMutantes > 1) { return true };
 
         // no recorre todas las columnas de la fila 0 sino aquellas que tienen por lo menos 4 casilleros en diagonal
 
