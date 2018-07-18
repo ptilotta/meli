@@ -22,39 +22,39 @@ app.get('/stats', function(req, res) {
             humanos = 0;
         } else {
             humanos = conteo;
+            console.log(`Primer COUNT humanos = ${humanos}`);
+
+            // Calculo los MUTANTES 
+
+            ADN.find({ mutante: true }).countDocuments((err, conteo) => {
+                if (err) {
+                    mutantes = 0;
+                } else {
+                    console.log(`Segundo COUNT mutantes = ${mutantes}`);
+                    mutantes = conteo;
+
+                    // Preparo mensaje JSON con la respuesta 
+
+                    todos = humanos + mutantes;
+                    if (humanos > 0) {
+                        var mensaje = {
+                            'count_mutant_dna': mutantes,
+                            'count_human_dna': humanos,
+                            'ratio': `${ mutantes / humanos}`
+                        }
+                    } else {
+                        var mensaje = {
+                            'count_mutant_dna': mutantes,
+                            'count_human_dna': humanos,
+                            'ratio': `${ mutantes }`
+                        }
+                    }
+                    console.log('finalizó STATS');
+                    return res.json(mensaje);
+                }
+            });
         }
-        console.log(`Primer COUNT humanos = ${humanos}`);
     });
-
-    // Calculo los MUTANTES 
-
-    ADN.find({ mutante: true }).countDocuments((err, conteo) => {
-        if (err) {
-            mutantes = 0;
-        } else {
-            mutantes = conteo;
-        }
-        console.log(`Segundo COUNT mutantes = ${mutantes}`);
-    });
-
-    // Preparo mensaje JSON con la respuesta 
-
-    todos = humanos + mutantes;
-    if (humanos > 0) {
-        var mensaje = {
-            'count_mutant_dna': mutantes,
-            'count_human_dna': humanos,
-            'ratio': `${ mutantes / humanos}`
-        }
-    } else {
-        var mensaje = {
-            'count_mutant_dna': mutantes,
-            'count_human_dna': humanos,
-            'ratio': `${ mutantes }`
-        }
-    }
-    console.log('finalizó STATS');
-    return res.json(mensaje);
 });
 //-----------------------------------------------------------------
 
