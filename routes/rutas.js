@@ -68,6 +68,7 @@ app.post('/mutant', function(req, res) {
         });
     }
 
+    console.log(matriz);
     let tabla = [];
 
     for (var i in matriz.dna.items) {
