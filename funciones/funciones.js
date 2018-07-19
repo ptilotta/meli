@@ -2,10 +2,11 @@
 //  Funciones de la aplicación
 // -------------------------------------------------
 
+const caracteres = "\"\{\}";
+
 function chequeoLongitud(tabla) {
     let longitudElemento = 0;
     let longitud = 0;
-    const caracteres = "\"{}";
     var re = new RegExp(reemplazoCaracteres(caracteres), 'g');
 
     for (let i = 0; i < tabla.length; i++) {
