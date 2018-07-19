@@ -6,7 +6,7 @@ function chequeoLongitud(tabla) {
     let longitudElemento = 0;
     let longitud = 0;
     for (let i = 0; i < tabla.length; i++) {
-        tabla[i] = reemplazoCaracteres(tabla[i]);
+        //        tabla[i] = reemplazoCaracteres(tabla[i]);
         longitud = tabla[i].length;
         if (i === 0) {
             longitudElemento = longitud;
@@ -22,7 +22,7 @@ function chequeoLongitud(tabla) {
 function chequeoLetrasValidas(tabla) {
     patron = "AGCT";
     for (var i = 0; i < tabla.length; i++) {
-        let registro = reemplazoCaracteres(tabla[i]);
+        //        let registro = reemplazoCaracteres(tabla[i]);
         for (var ind = 1; ind <= registro.length; ind++) {
             letra = registro.substr(ind, 1).toUpperCase();
             if (!patron.includes(letra, 0)) {
