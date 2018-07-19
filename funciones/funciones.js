@@ -10,7 +10,7 @@ function chequeoLongitud(tabla) {
     var re = new RegExp(reemplazoCaracteres(caracteres), 'g');
 
     for (let i = 0; i < tabla.length; i++) {
-        tabla[i] = tabla[i].replace(re, '');
+        tabla[i] = tabla[i].replace(/caracteres/gi, '');
         console.log(tabla[i]);
         longitud = tabla[i].length;
         if (i === 0) {
