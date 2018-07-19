@@ -183,9 +183,9 @@ function checkMutante(t) {
 }
 
 function reemplazoCaracteres(t) {
-    t = t.replace('\{' / g, '');
-    t = t.replace('\}' / g, '');
-    t = t.replace('\"' / g, '');
+    t = t.replace(/'\{' /g, '');
+    t = t.replace(/'\}' /g, '');
+    t = t.replace(/'\"' /g, '');
     return t
 }
 
