@@ -58,6 +58,8 @@ app.get('/stats', function(req, res) {
 
 app.post('/mutant', function(req, res) {
     let matriz = req.body;
+
+    console.log(matriz);
     let mutante = false;
 
     ' Valido el JSON recibido'
