@@ -73,8 +73,8 @@ app.post('/mutant', function(req, res) {
     let tabla = [];
 
     for (var i in matriz.dna) {
-        tabla.push(i);
-        console.log(i);
+        tabla.push(matriz[i].dna);
+        console.log(matriz[i].dna);
     }
 
     if (funciones.chequeoLongitud(tabla) === false) {
