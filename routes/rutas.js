@@ -70,8 +70,7 @@ app.post('/mutant', function(req, res) {
 
     console.log(`matriz.dna ${matriz.dna}`);
     console.log(`matriz.dna[0] ${matriz.dna[0]}`);
-    console.log(`matriz.dna[0].dna ${matriz.dna[0].dna}`);
-    console.log(`matriz[0].dna ${matriz[0].dna}`);
+    console.log(`matriz.dna.length ${matriz.dna.length}`);
 
     let tabla = [];
 
