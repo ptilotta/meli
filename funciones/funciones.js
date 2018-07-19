@@ -7,7 +7,6 @@ function chequeoLongitud(tabla) {
     let longitud = 0;
     for (let i = 0; i < tabla.length; i++) {
         tabla[i] = reemplazoCaracteres(tabla[i]);
-        console.log(tabla[i]);
         longitud = tabla[i].length;
         if (i === 0) {
             longitudElemento = longitud;
@@ -183,10 +182,11 @@ function checkMutante(t) {
 }
 
 function reemplazoCaracteres(t) {
-    t = t.replace(/'\{' /g, '');
-    t = t.replace(/'\}' /g, '');
-    t = t.replace(/'\"' /g, '');
+    t = t.replace(/\{/g, '');
+    t = t.replace(/\}/g, '');
+    t = t.replace(/\"/g, '');
     return t
+    console.log(t);
 }
 
 module.exports = {
