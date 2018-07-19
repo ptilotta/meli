@@ -5,10 +5,11 @@
 function chequeoLongitud(tabla) {
     let longitudElemento = 0;
     let longitud = 0;
-    let caracteres = "\"{}";
+    const caracteres = "\"{}";
+    var re = new RegExp(escapeRegExp(caracteres), 'g');
 
     for (let i = 0; i < tabla.length; i++) {
-        tabla[i] = tabla[i].replace(new RegExp(caracteres, 'g'), '');
+        tabla[i] = tabla[i].replace(re, '');
         console.log(tabla[i]);
         longitud = tabla[i].length;
         if (i === 0) {
@@ -182,6 +183,10 @@ function checkMutante(t) {
     } else {
         return false;
     }
+}
+
+function reemplazoCaracteres(t) {
+    return t.replace('[{}\"/g', '');
 }
 
 module.exports = {
