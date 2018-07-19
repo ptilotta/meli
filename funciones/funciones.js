@@ -12,7 +12,6 @@ function chequeoLongitud(tabla) {
             longitudElemento = longitud;
         } else {
             if (longitudElemento === longitud) {} else {
-                console.log('dio diferente');
                 return false;
             }
         }
@@ -22,11 +21,8 @@ function chequeoLongitud(tabla) {
 
 function chequeoLetrasValidas(tabla) {
     patron = "AGCT";
-    let caracteres = "\"{}";
-
     for (var i = 0; i < tabla.length; i++) {
-        tabla[i] = tabla[i].replace(new RegExp(caracteres, 'g'), '');
-        let registro = tabla[i];
+        let registro = reemplazoCaracteres(tabla[i]);
         for (var ind = 1; ind <= registro.length; ind++) {
             letra = registro.substr(ind, 1).toUpperCase();
             if (!patron.includes(letra, 0)) {
@@ -185,7 +181,7 @@ function reemplazoCaracteres(t) {
     t = t.replace(/\{/g, '');
     t = t.replace(/\}/g, '');
     t = t.replace(/\"/g, '');
-    console.log(t);
+    t = t.replace(/\'/g, '');
     return t;
 }
 
