@@ -185,13 +185,14 @@ function reemplazoCaracteres(t) {
     t = t.replace(/\{/g, '');
     t = t.replace(/\}/g, '');
     t = t.replace(/\"/g, '');
-    return t
     console.log(t);
+    return t;
 }
 
 module.exports = {
     chequeoLongitud,
     isMutant,
     chequeoLetrasValidas,
-    checkMutante
+    checkMutante,
+    reemplazoCaracteres
 }
