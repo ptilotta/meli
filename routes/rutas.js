@@ -71,7 +71,7 @@ app.post('/mutant', function(req, res) {
     let tabla = [];
 
     for (var i in matriz.dna.items) {
-        tabla.push(matriz.dba.items[i]);
+        tabla.push(matriz.dna.items[i]);
     }
 
     if (funciones.chequeoLongitud(tabla) === false) {
