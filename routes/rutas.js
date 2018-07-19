@@ -58,8 +58,6 @@ app.get('/stats', function(req, res) {
 
 app.post('/mutant', function(req, res) {
     let matriz = req.body;
-
-    console.log(matriz);
     let mutante = false;
 
     ' Valido el JSON recibido'
@@ -70,7 +68,11 @@ app.post('/mutant', function(req, res) {
         });
     }
 
-    let tabla = matriz.dna.split(",");
+    let tabla = [];
+
+    for (var i in matriz.dna.items) {
+        tabla.push(matriz.dba.items[i]);
+    }
 
     if (funciones.chequeoLongitud(tabla) === false) {
         return res.status(400).json({
