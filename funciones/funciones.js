@@ -11,7 +11,7 @@ function chequeoLongitud(tabla) {
 
     for (let i = 0; i < tabla.length; i++) {
         tabla[i] = tabla[i].replace(/caracteres/gi, '');
-        console.log(tabla[i]);
+        console.log(tabla[i].replace(/caracteres/gi, ''));
         longitud = tabla[i].length;
         if (i === 0) {
             longitudElemento = longitud;
