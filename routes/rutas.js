@@ -94,7 +94,7 @@ app.post('/mutant', function(req, res) {
     // Graba registro en MongoDB
 
     let adn = new ADN({
-        adn: funciones.reemplazoCaracteres(matriz.dna),
+        adn: matriz.dna,
         mutante: mutante
     });
 
