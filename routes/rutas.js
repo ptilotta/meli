@@ -68,15 +68,13 @@ app.post('/mutant', function(req, res) {
         });
     }
 
-    console.log(`matriz.dna ${matriz.dna}`);
-    console.log(`matriz.dna[0] ${matriz.dna[0]}`);
     console.log(`matriz.dna.length ${matriz.dna.length}`);
 
     let tabla = [];
 
-    for (var i in matriz) {
-        tabla.push(matriz.items[i].dna);
-        console.log(matriz.items[i].dna);
+    for (var i in matriz.dna) {
+        tabla.push(i);
+        console.log(i);
     }
 
     if (funciones.chequeoLongitud(tabla) === false) {
