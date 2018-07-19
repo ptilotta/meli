@@ -6,7 +6,6 @@ function chequeoLongitud(tabla) {
     let longitudElemento = 0;
     let longitud = 0;
     for (let i = 0; i < tabla.length; i++) {
-        //        tabla[i] = reemplazoCaracteres(tabla[i]);
         longitud = tabla[i].length;
         if (i === 0) {
             longitudElemento = longitud;
@@ -22,7 +21,7 @@ function chequeoLongitud(tabla) {
 function chequeoLetrasValidas(tabla) {
     patron = "AGCT";
     for (var i = 0; i < tabla.length; i++) {
-        //        let registro = reemplazoCaracteres(tabla[i]);
+        let registro = tabla[i];
         for (var ind = 1; ind <= registro.length; ind++) {
             letra = registro.substr(ind, 1).toUpperCase();
             if (!patron.includes(letra, 0)) {
@@ -93,7 +92,6 @@ function isMutant(dna) {
 
         console.log(`Campos Mutantes : ${camposMutantes}\n`);
         if (camposMutantes > 1) { return true };
-
 
 
         // no recorre todas las columnas de la fila 0 sino aquellas que tienen por lo menos 4 casilleros en diagonal
@@ -177,19 +175,9 @@ function checkMutante(t) {
     }
 }
 
-function reemplazoCaracteres(t) {
-    console.log(`t = ${t}`);
-    t = t.replace(/\{/g, '');
-    t = t.replace(/\}/g, '');
-    t = t.replace(/\"/g, '');
-    t = t.replace(/\'/g, '');
-    return t;
-}
-
 module.exports = {
     chequeoLongitud,
     isMutant,
     chequeoLetrasValidas,
-    checkMutante,
-    reemplazoCaracteres
+    checkMutante
 }
