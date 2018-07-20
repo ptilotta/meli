@@ -168,7 +168,7 @@ function isMutant(dna) {
 }
 
 function checkMutante(t) {
-    if (t.includes("AAAA") || t.includes("CCCC") || t.includes("GGGG") || t.includes("GGGG")) {
+    if (t.includes("AAAA") || t.includes("CCCC") || t.includes("GGGG") || t.includes("TTTT")) {
         return true;
     } else {
         return false;

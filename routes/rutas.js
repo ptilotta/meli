@@ -60,34 +60,34 @@ app.post('/mutant', function(req, res) {
     let matriz = req.body;
     let mutante = false;
 
-    ' Valido el JSON recibido'
+    // Valido el JSON recibido
 
     if (matriz.dna == undefined) {
-        return res.status(400).json({
-            "mensaje": "La Matriz 'dna' NO esta definida, debe enviar por POST una matriz llamada 'dna'"
-        });
+        return res.status(400).json({ "mensaje": "La Matriz 'dna' NO esta definida, debe enviar por POST una matriz llamada 'dna'" });
     }
 
-    console.log(`matriz.dna.length ${matriz.dna.length}`);
+
+    // Cargo los elementos de la matriz recibida en JSON en la tabla
 
     let tabla = [];
 
     for (var i in matriz.dna) {
-        console.log(matriz.dna[i]);
         tabla.push(matriz.dna[i]);
     }
 
+    // Chequeo la longitud heterogenea de los elementos de la tabla
+
     if (funciones.chequeoLongitud(tabla) === false) {
-        return res.status(400).json({
-            "mensaje": "Los elementos de la Matriz 'dna' deben tener la misma longitud para poder formar una matriz"
-        });
+        return res.status(400).json({ "mensaje": "Los elementos de la Matriz 'dna' deben tener la misma longitud para poder formar una matriz" });
     }
 
+    // Chequeo letras recibidas en las cadenas solo permitiendo las 4 letras válidas
+
     if (funciones.chequeoLetrasValidas(tabla) === false) {
-        return res.status(400).json({
-            "mensaje": "Los elementos de la Matriz 'dna' deben contener solo los juegos de valores de las letras 'A','C','T','G'"
-        });
+        return res.status(400).json({ "mensaje": "Los elementos de la Matriz 'dna' deben contener solo los juegos de valores de las letras 'A','C','T','G'" });
     }
+
+    // Llamado a la función Principal, que devuelve False o True si el ADN es Mutante
 
     mutante = funciones.isMutant(tabla);
 
@@ -105,6 +105,8 @@ app.post('/mutant', function(req, res) {
             }
         }
     });
+
+    // Devuelve el Status correcto en caso de que el ADN sea Mutante o Humano
 
     if (mutante) {
         return res.status(200).json();
