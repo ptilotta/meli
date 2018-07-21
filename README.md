@@ -1,7 +1,7 @@
 ## meli
 ## Examen BackEnd - Pablo Tilotta
 
-Se ha desarrollado , según lo requerido, una API REST en :
+Se ha desarrollado , según lo requerido, una **API REST** en :
 
 	NODE JS (v.10.6.0) 
 
@@ -17,7 +17,7 @@ Se han utilizado los módulos :
 
 	Mongoose-unique-validator (2.0.1)
 
-Se ha incluido una base de datos MongoDB y se utilizaron los servicios de :
+Se ha incluido una base de datos **MongoDB** y se utilizaron los servicios de :
 
 	mlab.com (servicio remoto de MongoDB)
 
@@ -32,8 +32,6 @@ Se han utilizado las herramientas de software :
 
 	Robo 3T – Cliente MongoDB para acceso local o remoto a la Base
 
-	Postman – Aplicación que permite probar las API REST enviando 
-    
-    POST, GET y cada uno de los modelos posibles.
+	Postman – Aplicación que permite probar las API REST enviando POST, GET y cada uno de los modelos posibles.
 
-Nota : Se entrega un PDF documentando el funcionamiento de la API y un detalle técnico de los procesos utilizados.
+Nota : Se entrega un **PDF** documentando el funcionamiento de la API y un detalle técnico de los procesos utilizados.
