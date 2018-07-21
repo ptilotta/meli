@@ -23,7 +23,6 @@ app.get('/stats', function(req, res) {
             })
         } else {
             humanos = conteo;
-            console.log(`humanos = ${humanos}`);
 
             // Calculo los MUTANTES 
 
@@ -35,7 +34,6 @@ app.get('/stats', function(req, res) {
                     })
                 } else {
                     mutantes = conteo;
-                    console.log(`mutantes = ${mutantes}`);
 
                     // Preparo mensaje JSON con la respuesta 
 
@@ -69,7 +67,6 @@ app.post('/mutant', function(req, res) {
     if (matriz.dna == undefined) {
         return res.status(400).json({ "mensaje": "La Matriz 'dna' NO esta definida, debe enviar por POST una matriz llamada 'dna'" });
     }
-
 
     // Cargo los elementos de la matriz recibida en JSON en la tabla
 
