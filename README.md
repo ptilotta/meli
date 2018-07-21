@@ -23,7 +23,7 @@ Se ha incluido una base de datos **MongoDB** y se utilizaron los servicios de :
 Se han utilizado las herramientas de software :
 
 	> Visual Studio Code (Editor de Texto adaptado a la sintaxis Javascript y NODE )
-	>Robo 3T – Cliente MongoDB para acceso local o remoto a la Base
-	>Postman – Aplicación que permite probar las API REST enviando POST, GET y cada uno de los modelos posibles.
+	> Robo 3T – Cliente MongoDB para acceso local o remoto a la Base
+	> Postman – Aplicación que permite probar las API REST enviando POST, GET y cada uno de los modelos posibles.
 
 Nota : Se entrega un **PDF** documentando el funcionamiento de la API y un detalle técnico de los procesos utilizados.
