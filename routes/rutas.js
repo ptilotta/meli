@@ -12,7 +12,6 @@ app.get('/stats', function(req, res) {
 
     let humanos = 0;
     let mutantes = 0;
-    let todos = 0;
 
     // Calculo los HUMANOS 
 
@@ -34,7 +33,6 @@ app.get('/stats', function(req, res) {
 
                     // Preparo mensaje JSON con la respuesta 
 
-                    todos = humanos + mutantes;
                     if (humanos > 0) {
                         var mensaje = {
                             'count_mutant_dna': mutantes,
