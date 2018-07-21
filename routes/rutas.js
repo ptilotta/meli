@@ -17,7 +17,10 @@ app.get('/stats', function(req, res) {
 
     ADN.find({ mutante: false }).countDocuments((err, conteo) => {
         if (err) {
-            humanos = 0;
+            return resp.status(400).json({
+                mensaje: "Error en la conexión a la BD ",
+                err
+            })
         } else {
             humanos = conteo;
             console.log(`humanos = ${humanos}`);
@@ -26,7 +29,10 @@ app.get('/stats', function(req, res) {
 
             ADN.find({ mutante: true }).countDocuments((err, conteo) => {
                 if (err) {
-                    mutantes = 0;
+                    return resp.status(400).json({
+                        mensaje: "Error en la conexión a la BD ",
+                        err
+                    })
                 } else {
                     mutantes = conteo;
                     console.log(`mutantes = ${mutantes}`);
