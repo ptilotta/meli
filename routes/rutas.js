@@ -104,6 +104,10 @@ app.post('/mutant', function(req, res) {
 
     adn.save((err, dnaDB) => {
         if (err) {
+
+            // Chequea que el error generado no sea por campo duplicado
+            // y de ser un error real, devuelve el status y el mensaje
+
             if (!err.message.includes("adn debe de ser único")) {
                 return res.status(400).json({ err });
             }
