@@ -1,5 +1,5 @@
 # meli
-Examen BackEnd Mercadolibre
+Examen BackEnd
 
 Se ha desarrollado , según lo requerido, una API REST en :
 •	NODE JS (v.10.6.0) 

@@ -43,9 +43,8 @@ function isMutant(dna) {
     console.log('Chequeo Horizontal');
     console.log('==================');
     for (let i = 0; i < dna.length; i++) {
-        t = dna[i];
-        console.log(t);
-        if (checkMutante(t)) { camposMutantes++ };
+        console.log(dna[i]);
+        if (checkMutante(dna[i])) { camposMutantes++ };
     }
     console.log(`Campos Mutantes : ${camposMutantes}\n`);
     if (camposMutantes > 1) { return true };
