@@ -50,6 +50,7 @@ function isMutant(dna) {
         for (let i = 0; i < dna.length; i++) {
             console.log(dna[i]);
             camposMutantes += checkMutante(dna[i]);
+            if (camposMutantes > 1) { return true };
         }
         console.log(`Campos Mutantes : ${camposMutantes}\n`);
         if (camposMutantes > 1) { return true };
@@ -72,6 +73,7 @@ function isMutant(dna) {
             }
             console.log(t);
             camposMutantes += checkMutante(t);
+            if (camposMutantes > 1) { return true };
         }
     } else {
 
@@ -198,10 +200,26 @@ function checkMutante(t) {
     // misma linea contenga mas de un patron
     let aBuscar = ['AAAA', 'CCCC', 'GGGG', 'TTTT'];
     let conteo = 0;
+
+    // Itero por cada elemento de la tabla aBuscar
+
     for (let i = 0; i < 4; i++) {
+
+        // Creo una expresión de Busqueda global 'g' para 
+        // contar cuantas veces encuentra el elemento en el
+        // string recibido
+
         let busca = new RegExp(aBuscar[i], "g");
+
+        // .match crea una matriz por cada elemento encontrado
+        // en caso de que una secuencia de ADN esté 2 veces o mas 
+        // en el mismo String, ej. 'AAAAAAAA' el vector tendrá mas
+        // de un elemento.
+
         let campo = t.match(busca);
         try {
+            // Se mete esta instrucción en un TRY CATCH, porque
+            // si no hubo .MATCH , la variable CAMPO es = NULL
             conteo += campo.length;
         } catch (error) {}
     }
