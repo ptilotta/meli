@@ -196,9 +196,13 @@ function isMutant(dna) {
 function checkMutante(t) {
     // al desconocer el largo de la matriz, podría pasar que una 
     // misma linea contenga mas de un patron
-
+    let aBuscar = ['AAAA', 'CCCC', 'GGGG', 'TTTT'];
     let conteo = 0;
-    conteo += t.count("AAAA") + t.count("CCCC") + t.count("GGGG") + t.count("TTTT");
+    for (let i = 0; i < 5; i++) {
+        texto = t.match(`/${aBuscar[i]}/g`).split(",")
+        conteo += texto.length;
+        console.log(`texto = ${texto} conteo=${conteo}`);
+    }
     return conteo
 }
 
