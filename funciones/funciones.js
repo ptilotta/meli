@@ -48,7 +48,6 @@ function isMutant(dna) {
             camposMutantes += checkMutante(dna[i]);
             if (camposMutantes > 1) { return true };
         }
-        if (camposMutantes > 1) { return true };
     }
 
     // Chequeo Vertical
