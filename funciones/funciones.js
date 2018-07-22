@@ -23,7 +23,7 @@ function chequeoLetrasValidas(tabla) {
     for (var i = 0; i < tabla.length; i++) {
         let registro = tabla[i];
         for (var ind = 1; ind <= registro.length; ind++) {
-            letra = registro.substr(ind, 1).toUpperCase();
+            let letra = registro.substr(ind, 1).toUpperCase();
             if (!patron.includes(letra, 0)) {
                 return false;
             }
@@ -34,8 +34,7 @@ function chequeoLetrasValidas(tabla) {
 
 function isMutant(dna) {
 
-    let t, esM = false;
-    let f, c;
+    let t, f, c;
     let camposMutantes = 0;
 
     // Chequeo Horizontal
@@ -46,7 +45,7 @@ function isMutant(dna) {
     if (dna[0].length > 3) {
         for (let i = 0; i < dna.length; i++) {
             camposMutantes += checkMutante(dna[i]);
-            if (camposMutantes > 1) { return true };
+            if (camposMutantes > 1) { return true; }
         }
     }
 
@@ -63,7 +62,7 @@ function isMutant(dna) {
                 t += dna[c].substr(i, 1);
             }
             camposMutantes += checkMutante(t);
-            if (camposMutantes > 1) { return true };
+            if (camposMutantes > 1) { return true; }
         }
     } else {
 
@@ -80,7 +79,7 @@ function isMutant(dna) {
     }
 
 
-    if (camposMutantes > 1) { return true };
+    if (camposMutantes > 1) { return true; }
 
     //  si la matriz no supera las 4 filas, no tendrá nunca 4 casilleros en diagonal
 
@@ -101,7 +100,7 @@ function isMutant(dna) {
                 }
             }
             camposMutantes += checkMutante(t);
-            if (camposMutantes > 1) { return true };
+            if (camposMutantes > 1) { return true; }
         }
 
         // no recorre todas las columnas de la fila 0 sino aquellas que tienen por lo menos 4 casilleros en diagonal
@@ -118,7 +117,7 @@ function isMutant(dna) {
                 }
             }
             camposMutantes += checkMutante(t);
-            if (camposMutantes > 1) { return true };
+            if (camposMutantes > 1) { return true; }
         }
 
         /* ================================ Recorrido Derecha a Izquierda =============================
@@ -135,7 +134,7 @@ function isMutant(dna) {
                 }
             }
             camposMutantes += checkMutante(t);
-            if (camposMutantes > 1) { return true };
+            if (camposMutantes > 1) { return true; }
         }
 
         // no recorre todas las columnas de la fila 0 sino aquellas que tienen por lo menos 4 casilleros en diagonal
@@ -151,11 +150,11 @@ function isMutant(dna) {
                 }
             }
             camposMutantes += checkMutante(t);
-            if (camposMutantes > 1) { return true };
+            if (camposMutantes > 1) { return true; }
         }
     }
 
-    if (camposMutantes > 1) { return true };
+    if (camposMutantes > 1) { return true; }
 
     return false;
 }
