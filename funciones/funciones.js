@@ -201,9 +201,9 @@ function checkMutante(t) {
     for (let i = 0; i < 4; i++) {
         let busca = new RegExp(aBuscar[i], "g");
         let campo = t.match(busca);
-        console.log(campo);
         if (!typeof campo === undefined) {
             let texto = campo.split(',');
+            console.log(`Largo ${texto.length}`);
             conteo += texto.length;
             console.log(`texto = ${texto} conteo=${conteo}`);
         }
