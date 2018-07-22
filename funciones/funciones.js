@@ -202,6 +202,7 @@ function checkMutante(t) {
         let busca = new RegExp(aBuscar[i], "g");
         let campo = t.match(busca);
         if (!campo === null) {
+            console.log(campo);
             conteo += campo.length;
         }
     }
