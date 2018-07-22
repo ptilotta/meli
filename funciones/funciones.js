@@ -203,7 +203,6 @@ function checkMutante(t) {
         let campo = t.match(busca);
         try {
             conteo += campo.length;
-            console.log(campo.length);
         } catch (error) {}
     }
     return conteo;
