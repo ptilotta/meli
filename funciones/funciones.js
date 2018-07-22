@@ -201,10 +201,10 @@ function checkMutante(t) {
     for (let i = 0; i < 4; i++) {
         let busca = new RegExp(aBuscar[i], "g");
         let campo = t.match(busca);
-        console.log(campo);
-        if (!campo === null) {
+        try {
             conteo += campo.length;
-        }
+            console.log(campo.length);
+        } catch (error) {}
     }
     return conteo;
 }
