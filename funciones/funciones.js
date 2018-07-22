@@ -82,113 +82,115 @@ function isMutant(dna) {
 
         if (camposMutantes > 1) {
             return true;
-        } else
+        } else {
             return false;
-    }
-}
-
-console.log(`Campos Mutantes : ${camposMutantes}\n`);
-if (camposMutantes > 1) { return true };
-
-//  si la matriz no supera las 4 filas, no tendrá nunca 4 casilleros en diagonal
-
-if (dna.length > 3) {
-
-    // ============================= Recorrido Izquierda a Derecha =============================
-    // no recorre todas las filas sino aquellas que tienen por lo menos 4 casilleros en diagonal
-
-    console.log('Chequeo Diagonal x Filas I>D');
-    console.log('============================');
-    for (let fila = 0; fila <= (dna.length - 4); fila++) {
-        t = "";
-        f = fila;
-
-        for (let c = 0; c <= dna.length; c++) {
-            t += dna[f].substr(c, 1);
-            f++;
-            if (f > dna.length - 1) {
-                break;
-            }
         }
-        console.log(t);
-        camposMutantes += checkMutante(t);
     }
+
 
     console.log(`Campos Mutantes : ${camposMutantes}\n`);
     if (camposMutantes > 1) { return true };
 
+    //  si la matriz no supera las 4 filas, no tendrá nunca 4 casilleros en diagonal
 
-    // no recorre todas las columnas de la fila 0 sino aquellas que tienen por lo menos 4 casilleros en diagonal
+    if (dna.length > 3) {
 
-    console.log('Chequeo Diagonal x Columnas I>D');
-    console.log('===============================');
-    for (let colu = 1; colu <= (dna[0].length - 4); colu++) {
-        t = "";
-        c = colu;
+        // ============================= Recorrido Izquierda a Derecha =============================
+        // no recorre todas las filas sino aquellas que tienen por lo menos 4 casilleros en diagonal
 
-        for (let f = 0; f <= (dna[0].length - colu); f++) {
-            t += dna[f].substr(c, 1);
-            c++;
-            if (c > dna[0].length - 1) {
-                break;
+        console.log('Chequeo Diagonal x Filas I>D');
+        console.log('============================');
+        for (let fila = 0; fila <= (dna.length - 4); fila++) {
+            t = "";
+            f = fila;
+
+            for (let c = 0; c <= dna.length; c++) {
+                t += dna[f].substr(c, 1);
+                f++;
+                if (f > dna.length - 1) {
+                    break;
+                }
             }
+            console.log(t);
+            camposMutantes += checkMutante(t);
+            if (camposMutantes > 1) { return true };
         }
-        console.log(t);
-        camposMutantes += checkMutante(t);
+
+        console.log(`Campos Mutantes : ${camposMutantes}\n`);
+        if (camposMutantes > 1) { return true };
+
+
+        // no recorre todas las columnas de la fila 0 sino aquellas que tienen por lo menos 4 casilleros en diagonal
+
+        console.log('Chequeo Diagonal x Columnas I>D');
+        console.log('===============================');
+        for (let colu = 1; colu <= (dna[0].length - 4); colu++) {
+            t = "";
+            c = colu;
+
+            for (let f = 0; f <= (dna[0].length - colu); f++) {
+                t += dna[f].substr(c, 1);
+                c++;
+                if (c > dna[0].length - 1) {
+                    break;
+                }
+            }
+            console.log(t);
+            camposMutantes += checkMutante(t);
+            if (camposMutantes > 1) { return true };
+        }
+
+        console.log(`Campos Mutantes : ${camposMutantes}\n`);
+        if (camposMutantes > 1) { return true };
+
+
+        // ================================ Recorrido Derecha a Izquierda =============================
+        //  no recorre todas las filas sino aquellas que tienen por lo menos 4 casilleros en diagonal
+
+        console.log('Chequeo Diagonal x Filas D>I');
+        console.log('============================');
+        for (let fila = 0; fila < (dna.length - 3); fila++) {
+            t = "";
+            f = fila;
+            for (let c = dna.length - 1; c > -1; c--) {
+                t += dna[f].substr(c, 1);
+                f++;
+                if (f > dna.length - 1) {
+                    break;
+                }
+            }
+            console.log(t);
+            camposMutantes += checkMutante(t);
+        }
+
+        console.log(`Campos Mutantes : ${camposMutantes}\n`);
+        if (camposMutantes > 1) { return true };
+
+        // no recorre todas las columnas de la fila 0 sino aquellas que tienen por lo menos 4 casilleros en diagonal
+
+        console.log('Chequeo Diagonal x Columnas D>I');
+        console.log('===============================');
+        for (let colu = dna[0].length - 2; colu > 2; colu--) {
+            t = "";
+            c = colu;
+            for (let f = 0; f <= dna.length; f++) {
+                t += dna[f].substr(c, 1);
+                c--;
+                if (c < 0) {
+                    break;
+                }
+            }
+            console.log(t);
+            camposMutantes += checkMutante(t);
+        }
+
+        console.log(`Campos Mutantes : ${camposMutantes}\n`);
+        if (camposMutantes > 1) { return true };
     }
 
-    console.log(`Campos Mutantes : ${camposMutantes}\n`);
     if (camposMutantes > 1) { return true };
 
-
-    // ================================ Recorrido Derecha a Izquierda =============================
-    //  no recorre todas las filas sino aquellas que tienen por lo menos 4 casilleros en diagonal
-
-    console.log('Chequeo Diagonal x Filas D>I');
-    console.log('============================');
-    for (let fila = 0; fila < (dna.length - 3); fila++) {
-        t = "";
-        f = fila;
-        for (let c = dna.length - 1; c > -1; c--) {
-            t += dna[f].substr(c, 1);
-            f++;
-            if (f > dna.length - 1) {
-                break;
-            }
-        }
-        console.log(t);
-        camposMutantes += checkMutante(t);
-    }
-
-    console.log(`Campos Mutantes : ${camposMutantes}\n`);
-    if (camposMutantes > 1) { return true };
-
-    // no recorre todas las columnas de la fila 0 sino aquellas que tienen por lo menos 4 casilleros en diagonal
-
-    console.log('Chequeo Diagonal x Columnas D>I');
-    console.log('===============================');
-    for (let colu = dna[0].length - 2; colu > 2; colu--) {
-        t = "";
-        c = colu;
-        for (let f = 0; f <= dna.length; f++) {
-            t += dna[f].substr(c, 1);
-            c--;
-            if (c < 0) {
-                break;
-            }
-        }
-        console.log(t);
-        camposMutantes += checkMutante(t);
-
-    }
-
-    console.log(`Campos Mutantes : ${camposMutantes}\n`);
-    if (camposMutantes > 1) { return true };
-}
-
-if (camposMutantes > 1) { return true };
-
-return false;
+    return false;
 }
 
 function checkMutante(t) {
