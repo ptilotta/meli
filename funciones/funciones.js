@@ -199,9 +199,12 @@ function checkMutante(t) {
     let aBuscar = ['AAAA', 'CCCC', 'GGGG', 'TTTT'];
     let conteo = 0;
     for (let i = 0; i < 5; i++) {
-        texto = t.match(`/${aBuscar[i]}/g`).split(",")
-        conteo += texto.length;
-        console.log(`texto = ${texto} conteo=${conteo}`);
+        let campo = t.match(`/${aBuscar[i]}/g`);
+        if (!typeof campo === undefined) {
+            let texto = campo.split(',');
+            conteo += texto.length;
+            console.log(`texto = ${texto} conteo=${conteo}`);
+        }
     }
     return conteo
 }
