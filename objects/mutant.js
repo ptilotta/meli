@@ -12,7 +12,7 @@ class Mutant {
 
     async graboMutant(adn, mutante) {
         let mongoMutant = new Mongo(process.env.MongoURI);
-        if (mongoMutant.error) {
+        if (mongoMutant.error === true) {
             this.error = true;
             this.mensaje = mongoMutant.mensaje;
             return;
@@ -32,7 +32,7 @@ class Mutant {
             mutante
         });
 
-        if (mongoMutant.error) {
+        if (mongoMutant.error === true) {
             console.log('Dio Error mongoMutant.Save !!!', this.mensaje);
             this.error = true;
             this.mensaje = mongoMutant.mensaje;
