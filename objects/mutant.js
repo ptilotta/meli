@@ -20,20 +20,20 @@ class Mutant {
 
         // Seteo Schema MUTANT
 
-        //        await mongoMutant.AddSchema('MUTANT', process.env.SCHEMA_MUTANT, process.env.MSGUNIQUE);
         await mongoMutant.AddSchema('MUTANT', {
             dna: { type: String, required: [true, 'Campo dna Requerido'] },
             mutantes: { type: Boolean, required: [true, 'Campo mutante Requerido'] }
         }, process.env.MSGUNIQUE);
 
         // Grabo los datos en la Base de Datos
-
+        console.log('Estoy aquí a punto de entrar en mongoMutant.Save');
         await mongoMutant.Save({
             adn,
             mutante
         });
 
         if (mongoMutant.error) {
+            console.log('Dio Error mongoMutant.Save !!!', this.mensaje);
             this.error = true;
             this.mensaje = mongoMutant.mensaje;
             return;
