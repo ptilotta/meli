@@ -37,6 +37,7 @@ class Mongo {
     async Connect() {
 
         /* Conecta a la Base de Mongo */
+        console.log('Conectando con la BD !!!! debería ser el primer CLG');
         await mongoose.connect(this.url, { useNewUrlParser: true }, (err, res) => {
             if (err) {
                 this.status = 0;
