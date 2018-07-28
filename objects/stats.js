@@ -57,16 +57,18 @@ class Stats {
     }
 
     async graboStats(mutante) {
-        let mongoStats = new Mongo;
-
-        await mongoStats.Connect(process.env.MongoURI);
+        let mongoStats = new Mongo(process.env.MongoURI);
         if (mongoStats.error) {
             this.error = true;
             this.mensaje = mongoStats.mensaje;
             return;
         }
 
-        await mongoStats.AddSchema('STATS', process.env.SCHEMA_STATS, process.env.MSGUNIQUE);
+        await mongoStats.AddSchema('STATS', {
+            id: { type: Number, required: [true, 'Campo ID Requerido'] },
+            humanos: { type: Number, required: [true, 'Campo humanos Requerido'] },
+            mutantes: { type: Number, required: [true, 'Campo mutantes Requerido'] }
+        }, process.env.MSGUNIQUE);
 
         // Leo el registro unico de Estadisticas
 
