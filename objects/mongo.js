@@ -25,6 +25,7 @@ class Mongo {
     */
     AddSchema(nombre, Schema, uniqueMsg) {
 
+        console.log('Entre a crear el Schema !');
         /* Crea un Schema para este objeto */
         this.uniqueMs = uniqueMsg;
         let sch = mongoose.Schema;
