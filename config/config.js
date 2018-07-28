@@ -14,7 +14,7 @@ process.env.MSGUNIQUE = { message: '{PATH} debe de ser único' };
 
 // Define el Schema para el servicio Stats
 
-process.env.SCHEMA_STATS = new mongoose.Schema({
+process.env.SCHEMA_STATS = mongoose.Schema({
     id: { type: Number, required: [true, 'Campo ID Requerido'] },
     humanos: { type: Number, required: [true, 'Campo humanos Requerido'] },
     mutantes: { type: Number, required: [true, 'Campo mutantes Requerido'] }
@@ -34,7 +34,7 @@ process.env.REGISTRO_VACIO = {
 
 // Define el Schema para el servicio Mutants
 
-process.env.SCHEMA_MUTANT = new mongoose.Schema({
+process.env.SCHEMA_MUTANT = mongoose.Schema({
     dna: { type: String, required: [true, 'Campo dna Requerido'] },
     mutantes: { type: Boolean, required: [true, 'Campo mutante Requerido'] }
 });
