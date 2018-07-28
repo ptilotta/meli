@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 // -------------------------------------------------------
 //  Puerto de RestServer - Heroku
 // -------------------------------------------------------
@@ -12,11 +14,11 @@ process.env.MSGUNIQUE = { message: '{PATH} debe de ser único' };
 
 // Define el Schema para el servicio Stats
 
-process.env.SCHEMA_STATS = {
+process.env.SCHEMA_STATS = new mongoose.Schema({
     id: { type: Number, required: [true, 'Campo ID Requerido'] },
     humanos: { type: Number, required: [true, 'Campo humanos Requerido'] },
     mutantes: { type: Number, required: [true, 'Campo mutantes Requerido'] }
-};
+});
 
 process.env.SIN_REGISTROS = {
     'count_mutant_dna': 0,
@@ -32,10 +34,10 @@ process.env.REGISTRO_VACIO = {
 
 // Define el Schema para el servicio Mutants
 
-process.env.SCHEMA_MUTANT = {
+process.env.SCHEMA_MUTANT = new mongoose.Schema({
     dna: { type: String, required: [true, 'Campo dna Requerido'] },
     mutantes: { type: Boolean, required: [true, 'Campo mutante Requerido'] }
-};
+});
 
 process.env.SUMA_HUMANOS = {
     id: 1,
