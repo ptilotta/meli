@@ -20,7 +20,11 @@ class Mutant {
 
         // Seteo Schema MUTANT
 
-        await mongoMutant.AddSchema('MUTANT', process.env.SCHEMA_MUTANT, process.env.MSGUNIQUE);
+        //        await mongoMutant.AddSchema('MUTANT', process.env.SCHEMA_MUTANT, process.env.MSGUNIQUE);
+        await mongoMutant.AddSchema('MUTANT', {
+            dna: { type: String, required: [true, 'Campo dna Requerido'] },
+            mutantes: { type: Boolean, required: [true, 'Campo mutante Requerido'] }
+        }, process.env.MSGUNIQUE);
 
         // Grabo los datos en la Base de Datos
 
