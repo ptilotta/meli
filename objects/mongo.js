@@ -1,18 +1,21 @@
 // ---------------------------------------------------------------
 //  Objeto para manejo de Base de Datos MongoDB
 // ---------------------------------------------------------------
+"use strict";
 
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
-"use strict";
+
 class Mongo {
-    constructor() {
+    constructor(url) {
         this.modelo; // Se creará el Modelo de Schema
         this.status = 0; // 0 = Desconectado, 1 = Conectado
         this.mensaje = {}; // Mensaje de Error en caso de que haya uno
         this.uniqueMsg; // Mensaje para el UniqueValidator
         this.error = false; // Indica cuando hubo un error
-        this.resultado = {}; // Almacena el objeto JSON resultado de los Find    
+        this.resultado = {}; // Almacena el objeto JSON resultado de los Find   
+        this.url = url; // URI de la conexión
+        this.Connect();
     };
 
     /* 
@@ -30,11 +33,10 @@ class Mongo {
         this.modelo = mongoose.model(nombre, sch);
     }
 
-    async Connect(url) {
+    async Connect() {
 
-        console.log(url);
         /* Conecta a la Base de Mongo */
-        await mongoose.connect(url, { useNewUrlParser: true }, (err, res) => {
+        await mongoose.connect(this.url, { useNewUrlParser: true }, (err, res) => {
             if (err) {
                 this.status = 0;
                 this.mensaje = err;

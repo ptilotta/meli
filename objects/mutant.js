@@ -11,8 +11,7 @@ class Mutant {
     }
 
     async graboMutant(adn, mutante) {
-        let mongoMutant = new Mongo;
-        await mongoMutant.Connect(process.env.MongoURI);
+        let mongoMutant = new Mongo(process.env.MongoURI);
         if (mongoMutant.error) {
             this.error = true;
             this.mensaje = mongoMutant.mensaje;
@@ -21,11 +20,11 @@ class Mutant {
 
         // Seteo Schema MUTANT
 
-        mongoMutant.AddSchema('MUTANT', process.env.SCHEMA_MUTANT, process.env.MSGUNIQUE);
+        await mongoMutant.AddSchema('MUTANT', process.env.SCHEMA_MUTANT, process.env.MSGUNIQUE);
 
         // Grabo los datos en la Base de Datos
 
-        mongoMutant.Save({
+        await mongoMutant.Save({
             adn,
             mutante
         });

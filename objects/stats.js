@@ -1,8 +1,8 @@
 // ---------------------------------------------------------------
 //  Objeto para manejo de Estadisticas
 // ---------------------------------------------------------------
-const mongo = require('../objects/mongo.js');
-
+"use strict";
+const Mongo = require('../objects/mongo.js');
 class Stats {
     constructor() {
         this.error = false;
@@ -10,9 +10,7 @@ class Stats {
     }
 
     async obtengoStats() {
-        let mongoStats = new mongo;
-
-        await mongoStats.Connect(process.env.MongoURI);
+        let mongoStats = new Mongo(process.env.MongoURI);
         if (mongoStats.error) {
             this.error = true;
             this.mensaje = mongoStats.mensaje;
