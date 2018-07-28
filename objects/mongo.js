@@ -34,11 +34,11 @@ class Mongo {
         this.modelo = mongoose.model(nombre, esquema);
     }
 
-    async Connect() {
+    Connect() {
 
         /* Conecta a la Base de Mongo */
         console.log('Conectando con la BD !!!! debería ser el primer CLG');
-        await mongoose.connect(this.url, { useNewUrlParser: true }, (err, res) => {
+        mongoose.connect(this.url, { useNewUrlParser: true }, (err, res) => {
             if (err) {
                 this.status = 0;
                 this.mensaje = err;
@@ -46,15 +46,13 @@ class Mongo {
                 console.log('Connect dio error', err);
                 return;
             }
-            console.log('Llegue aca !!');
             this.status = 1;
-            console.log(`y ahora Status vale ${this.status}`);
             this.mensaje = {};
             this.error = false;
         })
     };
 
-    async Save(datos) {
+    Save(datos) {
         console.log('=====================================');
         console.log('           SAVE                      ');
         console.log('=====================================');
@@ -77,7 +75,7 @@ class Mongo {
         }
         let sch = new this.modelo(datos);
 
-        await sch.save((err, results) => {
+        sch.save((err, results) => {
             this.error = false;
             this.mensaje = {};
             if (err) {
@@ -99,11 +97,11 @@ class Mongo {
         });
     }
 
-    async FindOne() {
+    FindOne() {
         console.log('=====================================');
         console.log('           FINDONE                   ');
         console.log('=====================================');
-        await this.modelo.findOne((err, res) => {
+        this.modelo.findOne((err, res) => {
             if (err) {
                 this.error = true;
                 this.mensaje = JSON.stringify(err);
@@ -118,11 +116,11 @@ class Mongo {
         })
     };
 
-    async Update(instruccion) {
+    Update(instruccion) {
         console.log('=====================================');
         console.log('           UPDATE                    ');
         console.log('=====================================');
-        await this.modelo.update(instruccion, (err, res) => {
+        this.modelo.update(instruccion, (err, res) => {
             if (err) {
                 this.error = true;
                 this.mensaje = JSON.stringify(err);

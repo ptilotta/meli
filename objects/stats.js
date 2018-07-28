@@ -9,7 +9,7 @@ class Stats {
         this.mensaje = {};
     }
 
-    async obtengoStats() {
+    obtengoStats() {
         let mongoStats = new Mongo(process.env.MongoURI);
         if (mongoStats.error) {
             this.error = true;
@@ -18,11 +18,11 @@ class Stats {
         }
 
         // Seteo Schema
-        await mongoStats.AddSchema('STATS', process.env.SCHEMA_STATS, process.env.MSGUNIQUE);
+        mongoStats.AddSchema('STATS', process.env.SCHEMA_STATS, process.env.MSGUNIQUE);
 
         // Leo el primer registro de la colección
 
-        await mongoStats.FindOne();
+        mongoStats.FindOne();
         if (mongoStats.error) {
             this.error = true;
             this.mensaje = mongoStats.mensaje;
@@ -56,7 +56,7 @@ class Stats {
         }
     }
 
-    async graboStats(mutante) {
+    graboStats(mutante) {
         let mongoStats = new Mongo(process.env.MongoURI);
         if (mongoStats.error) {
             this.error = true;
@@ -64,7 +64,7 @@ class Stats {
             return;
         }
 
-        await mongoStats.AddSchema('STATS', {
+        mongoStats.AddSchema('STATS', {
             id: { type: Number, required: [true, 'Campo ID Requerido'] },
             humanos: { type: Number, required: [true, 'Campo humanos Requerido'] },
             mutantes: { type: Number, required: [true, 'Campo mutantes Requerido'] }
@@ -72,7 +72,7 @@ class Stats {
 
         // Leo el registro unico de Estadisticas
 
-        await mongoStats.FindOne();
+        mongoStats.FindOne();
         if (!mongoStats.resultado) {
 
             // Si el registro no existe, crea uno
@@ -84,9 +84,9 @@ class Stats {
             }
         }
         if (mutante) {
-            await mongoStats.Update(process.env.SUMA_MUTANTES);
+            mongoStats.Update(process.env.SUMA_MUTANTES);
         } else {
-            await mongoStats.Update(process.env.SUMA_HUMANOS);
+            mongoStats.Update(process.env.SUMA_HUMANOS);
         }
         if (mongoStats.error) {
             this.error = true;
