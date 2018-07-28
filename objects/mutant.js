@@ -12,7 +12,6 @@ class Mutant {
 
     async graboMutant(adn, mutante) {
         let mongoMutant = new Mongo;
-        console.log(process.env.MongoURI);
         await mongoMutant.Connect(process.env.MongoURI);
         if (mongoMutant.error) {
             this.error = true;

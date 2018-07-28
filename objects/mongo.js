@@ -24,7 +24,7 @@ class Mongo {
 
         /* Crea un Schema para este objeto */
         this.uniqueMs = uniqueMsg;
-        console.log(schema);
+        console.log(JSON.parse(schema));
         let sch = new Schema(schema);
         sch.plugin(uniqueValidator, { message: uniqueMsg });
         this.modelo = mongoose.model(nombre, sch);
