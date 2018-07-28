@@ -36,6 +36,7 @@ class Mongo {
     async Connect() {
 
         /* Conecta a la Base de Mongo */
+        console.log(`Conectando a ${this.url}`);
         await mongoose.connect(this.url, { useNewUrlParser: true }, (err, res) => {
             if (err) {
                 this.status = 0;
