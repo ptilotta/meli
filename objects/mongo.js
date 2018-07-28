@@ -55,7 +55,7 @@ class Mongo {
         console.log('=====================================');
         console.log('           SAVE                      ');
         console.log('=====================================');
-        console.log(`datos = ${datos}`);
+        console.log(`Status = ${this.status}`);
         if (this.status === 0) {
             this.error = true;
             this.mensaje = JSON.stringify({
