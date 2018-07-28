@@ -56,15 +56,6 @@ class Mongo {
         console.log('=====================================');
         console.log('           SAVE                      ');
         console.log('=====================================');
-        console.log(`Status = ${this.status}`);
-        if (this.status === 0) {
-            this.error = true;
-            this.mensaje = JSON.stringify({
-                mensaje: 'Sin Conexión a la BD'
-            });
-            console.log(this.mensaje);
-            return;
-        }
         if (this.modelo === undefined) {
             this.error = true;
             this.mensaje = JSON.stringify({
