@@ -57,7 +57,7 @@ class Stats {
     }
 
     async graboStats(mutante) {
-        let mongoStats = new mongo;
+        let mongoStats = new Mongo;
 
         await mongoStats.Connect(process.env.MongoURI);
         if (mongoStats.error) {
