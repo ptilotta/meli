@@ -29,8 +29,8 @@ class Mongo {
         this.uniqueMs = uniqueMsg;
         let sch = mongoose.Schema;
         let esquema = new sch(Schema)
-        sch.plugin(uniqueValidator, { message: uniqueMsg });
-        this.modelo = mongoose.model(nombre, sch);
+        esquema.plugin(uniqueValidator, { message: uniqueMsg });
+        this.modelo = mongoose.model(nombre, esquema);
     }
 
     async Connect() {
