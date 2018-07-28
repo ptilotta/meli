@@ -50,11 +50,16 @@ class Mongo {
     };
 
     async Save(datos) {
+        console.log('=====================================');
+        console.log('           SAVE                      ');
+        console.log('=====================================');
+        console.log(`datos = ${datos}`);
         if (this.status === 0) {
             this.error = true;
             this.mensaje = JSON.stringify({
                 mensaje: 'Sin Conexión a la BD'
             });
+            console.log(this.mensaje);
             return;
         }
         if (this.modelo === undefined) {
@@ -62,6 +67,7 @@ class Mongo {
             this.mensaje = JSON.stringify({
                 mensaje: 'Schema no definido, debe usar el método AddSchema'
             });
+            console.log(this.mensaje);
             return;
         }
         let sch = new this.modelo(datos);
@@ -77,6 +83,7 @@ class Mongo {
                 if (!err.message.includes(this.uniqueMsg)) {
                     this.error = true;
                     this.mensaje = JSON.stringify(err);
+                    console.log(this.mensaje);
                     return;
                 }
             }
@@ -88,10 +95,14 @@ class Mongo {
     }
 
     async FindOne() {
+        console.log('=====================================');
+        console.log('           FINDONE                   ');
+        console.log('=====================================');
         await this.modelo.findOne((err, res) => {
             if (err) {
                 this.error = true;
                 this.mensaje = JSON.stringify(err);
+                console.log(this.mensaje);
                 return;
             }
             if (!res === null) {
@@ -103,10 +114,14 @@ class Mongo {
     };
 
     async Update(instruccion) {
+        console.log('=====================================');
+        console.log('           UPDATE                    ');
+        console.log('=====================================');
         await this.modelo.update(instruccion, (err, res) => {
             if (err) {
                 this.error = true;
                 this.mensaje = JSON.stringify(err);
+                console.log(this.mensaje);
                 return;
             }
             this.error = false;
