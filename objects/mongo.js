@@ -42,6 +42,7 @@ class Mongo {
                 this.status = 0;
                 this.mensaje = err;
                 this.error = true;
+                console.log('Connect dio error', err);
                 return;
             }
             this.status = 1;
