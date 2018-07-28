@@ -1,118 +1,66 @@
-const funciones = require('../funciones/funciones.js');
+"use strict";
+
+/* Carga Objetos */
+var Mongo = require('../objects/mongo.js');
+var Stats = require('../objects/stats.js');
+var Mutant = require('../objects/mutant.js');
+var Adn = require('../objects/adn.js');
 
 const express = require('express');
-const ADN = require('../models/adn.js');
 const app = express();
 
-
-//-----------------------------------------------------------------
+//---------------------------------------------------------------------
 // SERVICIO STATS - Devuelve estadísticas de los Mutantes/Humanos
-//-----------------------------------------------------------------
+//---------------------------------------------------------------------
 app.get('/stats', function(req, res) {
 
-    let humanos = 0;
-    let mutantes = 0;
-
-    // Calculo los HUMANOS 
-
-    ADN.find({ mutante: false }).countDocuments((err, conteo) => {
-        if (err) {
-            return resp.status(400).json({
-                mensaje: "Error en la conexión a la BD ",
-                err
-            })
-        } else {
-            humanos = conteo;
-
-            // Calculo los MUTANTES 
-
-            ADN.find({ mutante: true }).countDocuments((err, conteo) => {
-                if (err) {
-                    return resp.status(400).json({
-                        mensaje: "Error en la conexión a la BD ",
-                        err
-                    })
-                } else {
-                    mutantes = conteo;
-
-                    // Preparo mensaje JSON con la respuesta 
-
-                    if (humanos > 0) {
-                        var mensaje = {
-                            'count_mutant_dna': mutantes,
-                            'count_human_dna': humanos,
-                            'ratio': `${ mutantes / humanos}`
-                        }
-                    } else {
-                        var mensaje = {
-                            'count_mutant_dna': mutantes,
-                            'count_human_dna': humanos,
-                            'ratio': `${ mutantes }`
-                        }
-                    }
-                    return res.json(mensaje);
-                }
-            });
-        }
-    });
+    var stats = new Stats;
+    stats.obtengoStats();
+    if (stats.error) {
+        res.status(400).json(stats.mensaje);
+    } else {
+        res.status(200).json(stats.mensaje);
+    }
 });
-//-----------------------------------------------------------------
 
+//-----------------------------------------------------------------------
+// SERVICIO MUTANT - Determina si el ADN recibido es de Mutante o Humano
+//-----------------------------------------------------------------------
 app.post('/mutant', function(req, res) {
-    let matriz = req.body;
+    const matriz = req.body;
     let mutante = false;
 
-    // Valido el JSON recibido
-
-    if (matriz.dna == undefined) {
+    // Valido que venga un JSON con la Matriz de ADN
+    if (matriz.dna === undefined) {
         return res.status(400).json({ "mensaje": "La Matriz 'dna' NO esta definida, debe enviar por POST una matriz llamada 'dna'" });
     }
 
-    // Cargo los elementos de la matriz recibida en JSON en la tabla
+    // Cargo e Inicializo el Objeto Adn
+    var mADN = new Adn(matriz.dna, 4, 2, "AGTC");
 
-    let tabla = [];
-
-    for (var i in matriz.dna) {
-        tabla.push(matriz.dna[i]);
-    }
-
-    // Chequeo la longitud heterogenea de los elementos de la tabla
-
-    if (funciones.chequeoLongitud(tabla) === false) {
-        return res.status(400).json({ "mensaje": "Los elementos de la Matriz 'dna' deben tener la misma longitud para poder formar una matriz" });
-    }
-
-    // Chequeo letras recibidas en las cadenas solo permitiendo las 4 letras válidas
-
-    if (funciones.chequeoLetrasValidas(tabla) === false) {
-        return res.status(400).json({ "mensaje": "Los elementos de la Matriz 'dna' deben contener solo los juegos de valores de las letras 'A','C','T','G'" });
+    // Realizo las validaciones
+    if (!mADN.validaciones) {
+        return res.status(400).json(mADN.mensajeError);
     }
 
     // Llamado a la función Principal, que devuelve False o True si el ADN es Mutante
-
-    mutante = funciones.isMutant(tabla);
+    mutante = mADN.isMutant();
 
     // Graba registro en MongoDB
+    var mut = new Mutant;
+    mut.graboMutant(matriz.dna, mutante);
+    if (mut.error) {
+        return res.status(400).json(mut.mensaje);
+    }
 
-    let adn = new ADN({
-        adn: matriz.dna,
-        mutante: mutante
-    });
+    // grabo STATS
+    var stats = new Stats;
+    stats.graboStats(mutante);
+    if (stats.error) {
+        return res.status(400).json(stats.mensaje);
+    }
 
-    adn.save((err, dnaDB) => {
-        if (err) {
-
-            // Chequea que el error generado no sea por campo duplicado
-            // y de ser un error real, devuelve el status y el mensaje
-
-            if (!err.message.includes("adn debe de ser único")) {
-                return res.status(400).json({ err });
-            }
-        }
-    });
-
-    // Devuelve el Status correcto en caso de que el ADN sea Mutante o Humano
-
+    // Envío respuesta al Navegador
     if (mutante) {
         return res.status(200).json();
     } else {
