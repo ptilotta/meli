@@ -76,7 +76,7 @@ class Stats {
         if (!mongoStats.resultado) {
 
             // Si el registro no existe, crea uno
-            await mongoStats.Save(process.env.REGISTRO_VACIO);
+            mongoStats.Save(process.env.REGISTRO_VACIO);
             if (mongoStats.error) {
                 this.error = true;
                 this.mensaje = mongoStats.mensaje;
