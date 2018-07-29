@@ -24,6 +24,7 @@ class Stats {
 
         mongoStats.FindOne();
         if (mongoStats.error) {
+            console.log(`Hubo Error en FINDONE !!! mira esto ${mongoStats.mensaje}`);
             this.error = true;
             this.mensaje = mongoStats.mensaje;
             return;
@@ -33,6 +34,7 @@ class Stats {
         if (!mongoStats.mensaje) {
 
             // Registro no existe
+            console.log('!mongoStats.mensaje >>>>>>>');
             this.mensaje = process.env.SIN_REGISTROS;
             return;
 
