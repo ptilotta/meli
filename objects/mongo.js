@@ -27,14 +27,15 @@ class Mongo {
         /* Crea un Schema para este objeto */
 
         this.uniqueMs = uniqueMsg;
-        let sch = mongoose.Schema;
+        let mch = mongoose.Schema;
+
         try {
             console.log(`nombre = ${nombre} esquema=${esquema}`);
             try {
-                let esquema = new sch(Schema);
+                let esquema = new mch(Schema);
 
             } catch (error) {
-                let esquema = sch(Schema);
+                let esquema = mch(Schema);
                 console.log(`El Error en AddSchema es ${error}`);
             }
             esquema.plugin(uniqueValidator, { message: uniqueMsg });
