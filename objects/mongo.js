@@ -91,9 +91,9 @@ class Mongo {
             // Chequea que el error generado no sea por campo duplicado
             // y de ser un error real, devuelve el status y el mensaje
             if (!error.message.includes(this.uniqueMsg)) {
-                console.log(`ERROR EN SAVE : ${this.mensaje}`);
+                console.log(`ERROR EN SAVE : ${error} this.uniqueMsg=${this.uniqueMsg}`);
                 this.error = true;
-                this.mensaje = JSON.stringify(err);
+                this.mensaje = JSON.stringify(error);
             } else {
                 this.error = false;
                 this.mensaje = {};
