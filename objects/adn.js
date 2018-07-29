@@ -23,6 +23,7 @@ class Adn {
 
         // Creo la matriz desde el JSON recibido
         for (var i in adn) {
+            console.log(adn[i]);
             this.tabla.push(adn[i]);
         }
     }
