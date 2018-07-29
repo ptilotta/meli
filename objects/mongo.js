@@ -27,7 +27,7 @@ class Mongo {
         /* Crea un Schema para este objeto */
         this.uniqueMs = uniqueMsg;
         let sch = mongoose.Schema;
-        let esquema = new sch(Schema)
+        let esquema = await new sch(Schema)
         esquema.plugin(uniqueValidator, { message: uniqueMsg });
         try {
             console.log(`nombre = ${nombre} esquema=${esquema}`);
