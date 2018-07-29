@@ -42,13 +42,12 @@ class Mutant {
                         this.mensaje = mongoMutant.mensaje;
                         return;
                     }
+                    console.log('6. Fin de GraboMutant');
+                    this.error = false;
+                    this.mensaje = {};
                 });
             });
         });
-
-        console.log('6. Fin de GraboMutant');
-        this.error = false;
-        this.mensaje = {};
     }
 }
 
