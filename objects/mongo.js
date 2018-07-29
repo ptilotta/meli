@@ -73,19 +73,20 @@ class Mongo {
             return;
         }
 
-        let sch = new this.modelo(datos);
         try {
+            let sch = await new this.modelo(datos);
             await sch.save();
             this.error = false;
             this.mensaje = {};
+            return;
         } catch (error) {
             // Chequea que el error generado no sea por campo duplicado
             // y de ser un error real, devuelve el status y el mensaje
 
             if (!error.message.includes(this.uniqueMsg)) {
+                console.log(`ERROR EN SAVE : ${this.mensaje}`);
                 this.error = true;
                 this.mensaje = JSON.stringify(err);
-                console.log(`ERROR EN SAVE : ${this.mensaje}`);
             } else {
                 this.error = false;
                 this.mensaje = {};
