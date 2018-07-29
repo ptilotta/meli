@@ -89,22 +89,20 @@ class Mongo {
         console.log('=====================================');
         console.log('           FINDONE                   ');
         console.log('=====================================');
-        await this.modelo.findOne((err, res) => {
-            if (err) {
-                this.error = true;
-                this.mensaje = JSON.stringify(err);
-                console.log('Hubo Error en FINDONE', err);
-                return;
-            }
-            console.log(` EL RESULTADO DE FINDONE ES ${res}`);
-            if (!res === null) {
-                console.log('RES NOT NULL');
-                this.resultado = res;
+        try {
+            let registro = await this.modelo.findOne();
+            console.log(` EL RESULTADO DE FINDONE ES ${registro}`);
+            if (registro) {
+                this.resultado = registro;
             } else {
-                console.log('RES NULL');
                 this.resultado = {};
             }
-        })
+        } catch (error) {
+            this.error = true;
+            this.mensaje = JSON.stringify(err);
+            console.log('Hubo Error en FINDONE', err);
+            return;
+        }
     };
 
     async Update(instruccion) {

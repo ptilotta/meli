@@ -30,6 +30,7 @@ class Mutant {
                     dna: adn,
                     mutante
                 }).then(() => {
+                    console.log(`mongoMutant.error = ${mongoMutant.error}`);
                     if (mongoMutant.error === true) {
                         console.log('Dio Error mongoMutant.Save !!!', this.mensaje);
                         this.error = true;
