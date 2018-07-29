@@ -36,10 +36,10 @@ class Mongo {
         } catch (error) {}
     }
 
-    async Connect() {
+    Connect() {
 
         /* Conecta a la Base de Mongo */
-        await mongoose.connect(this.url, { useNewUrlParser: true }, (err, res) => {
+        mongoose.connect(this.url, { useNewUrlParser: true }, (err, res) => {
             if (err) {
                 this.status = 0;
                 this.mensaje = err;
@@ -52,7 +52,7 @@ class Mongo {
         })
     };
 
-    async Save(datos) {
+    Save(datos) {
         console.log('=====================================');
         console.log('           SAVE                      ');
         console.log('=====================================');
@@ -64,7 +64,7 @@ class Mongo {
             return;
         }
         let sch = new this.modelo(datos);
-        await sch.save((err, results) => {
+        sch.save((err, results) => {
             this.error = false;
             this.mensaje = {};
             if (err) {
@@ -86,11 +86,11 @@ class Mongo {
         });
     }
 
-    async FindOne() {
+    FindOne() {
         console.log('=====================================');
         console.log('           FINDONE                   ');
         console.log('=====================================');
-        await this.modelo.findOne((err, res) => {
+        this.modelo.findOne((err, res) => {
             if (err) {
                 this.error = true;
                 this.mensaje = JSON.stringify(err);
@@ -108,11 +108,11 @@ class Mongo {
         })
     };
 
-    async Update(instruccion) {
+    Update(instruccion) {
         console.log('=====================================');
         console.log('           UPDATE                    ');
         console.log('=====================================');
-        await this.modelo.update(instruccion, (err, res) => {
+        this.modelo.update(instruccion, (err, res) => {
             if (err) {
                 this.error = true;
                 this.mensaje = JSON.stringify(err);

@@ -56,7 +56,7 @@ class Stats {
         }
     }
 
-    async graboStats(mutante) {
+    graboStats(mutante) {
         let mongoStats = new Mongo(process.env.MongoURI);
         if (mongoStats.error) {
             this.error = true;
@@ -64,7 +64,7 @@ class Stats {
             return;
         }
 
-        await mongoStats.AddSchema('STATS', {
+        mongoStats.AddSchema('STATS', {
             id: { type: Number, required: [true, 'Campo ID Requerido'] },
             humanos: { type: Number, required: [true, 'Campo humanos Requerido'] },
             mutantes: { type: Number, required: [true, 'Campo mutantes Requerido'] }
@@ -72,13 +72,13 @@ class Stats {
 
         // Leo el registro unico de Estadisticas
 
-        await mongoStats.FindOne();
+        mongoStats.FindOne();
         let registros = Object.keys(mongoStats.resultado).length;
         console.log(`Registros de FindOne ${registros}`);
         if (registros === 0) {
 
             // Si el registro no existe, crea uno
-            await mongoStats.Save({
+            mongoStats.Save({
                 id: 1,
                 humanos: 0,
                 mutantes: 0
@@ -90,12 +90,12 @@ class Stats {
             }
         }
         if (mutante) {
-            await mongoStats.Update({
+            mongoStats.Update({
                 id: 1,
                 $inc: { mutantes: 1 }
             });
         } else {
-            await mongoStats.Update({
+            mongoStats.Update({
                 id: 1,
                 $inc: { humanos: 1 }
             });
