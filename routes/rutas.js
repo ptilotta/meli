@@ -15,12 +15,11 @@ const app = express();
 app.get('/stats', function(req, res) {
 
     var stats = new Stats;
-    stats.obtengoStats();
-    if (stats.error) {
-        res.status(400).json(stats.mensaje);
-    } else {
+    stats.obtengoStats().then(() => {
         res.status(200).json(stats.mensaje);
-    }
+    }).catch((err) => {
+        res.status(400).json(stats.mensaje);
+    });
 });
 
 //-----------------------------------------------------------------------
@@ -51,10 +50,9 @@ app.post('/mutant', function(req, res) {
         // Graba registro en MongoDB de ADN
         console.log('*** M U T A N T ***');
         var mut = new Mutant;
-        let gm = mut.graboMutant(matriz.dna, mutante);
-        gm.then(() => {
+        mut.graboMutant(matriz.dna, mutante).then(() => {
             resolve(mut.mensaje);
-        }, (err) => {
+        }).catch((err) => {
             reject(res.status(400).json(mut.mensaje));
         });
 
@@ -63,10 +61,9 @@ app.post('/mutant', function(req, res) {
         // grabo registro en MongoDB de STATS
         console.log('*** S T A T S ***');
         var stats = new Stats;
-        let gs = stats.graboStats(mutante);
-        gs.then(() => {
+        stats.graboStats(mutante).then(() => {
             resolve(stats.mensaje);
-        }, (err) => {
+        }).catch((err) => {
             reject(res.status(400).json(stats.mensaje));
         });
     });
