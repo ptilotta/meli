@@ -96,9 +96,9 @@ class Mongo {
             if (err) {
                 this.error = true;
                 this.mensaje = JSON.stringify(err);
-                console.log(`Error en FindONE ${this.mensaje}`);
                 return;
             }
+            console.log(`RES = ${res}`);
             if (!res === null) {
                 this.resultado = res;
             } else {
