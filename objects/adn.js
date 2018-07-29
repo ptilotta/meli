@@ -176,7 +176,7 @@ class Adn {
                     break;
                 case "D":
                     if (iteroporFila === false) {
-                        actual_x = actual_x + Abs(incrementoColumna)
+                        actual_x = actual_x + Math.abs(incrementoColumna)
                         actual_y = desde
                         if (actual_x > (this.tabla[0].length - 1)) {
                             iteroporFila = true;
