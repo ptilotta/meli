@@ -127,10 +127,12 @@ class Mongo {
         console.log('           UPDATE                    ');
         console.log('=====================================');
         try {
+            console.log('Entre en Update');
             await modelo.update();
             this.error = false;
             this.mensaje = {};
         } catch (error) {
+            console.log(`Dio error Update ${error}`);
             this.error = true;
             this.mensaje = JSON.stringify(error);
         }
