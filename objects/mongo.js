@@ -51,7 +51,7 @@ class Mongo {
         })
     };
 
-    Save(datos) {
+    async Save(datos) {
         console.log('=====================================');
         console.log('           SAVE                      ');
         console.log('=====================================');
@@ -63,7 +63,7 @@ class Mongo {
             return;
         }
         let sch = new this.modelo(datos);
-        sch.save((err, results) => {
+        await sch.save((err, results) => {
             this.error = false;
             this.mensaje = {};
             if (err) {
@@ -85,11 +85,11 @@ class Mongo {
         });
     }
 
-    FindOne() {
+    async FindOne() {
         console.log('=====================================');
         console.log('           FINDONE                   ');
         console.log('=====================================');
-        this.modelo.findOne((err, res) => {
+        await this.modelo.findOne((err, res) => {
             if (err) {
                 this.error = true;
                 this.mensaje = JSON.stringify(err);
@@ -107,11 +107,11 @@ class Mongo {
         })
     };
 
-    Update(instruccion) {
+    async Update(instruccion) {
         console.log('=====================================');
         console.log('           UPDATE                    ');
         console.log('=====================================');
-        this.modelo.update(instruccion, (err, res) => {
+        await this.modelo.update(instruccion, (err, res) => {
             if (err) {
                 this.error = true;
                 this.mensaje = JSON.stringify(err);
