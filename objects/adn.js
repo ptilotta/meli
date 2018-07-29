@@ -65,11 +65,9 @@ class Adn {
         console.log('> ADN chequeoLetrasValidas');
         this.error = false;
         this.mensajeError = {};
-        console.log(`this.tabla.length = ${this.tabla.length}`);
         for (var i = 0; i < this.tabla.length; i++) {
             let registro = this.tabla[i];
-            for (var ind = 1; ind <= this.registro.length; ind++) {
-                console.log(ind);
+            for (var ind = 1; ind <= registro.length; ind++) {
                 let letra = registro.substr(ind, 1).toUpperCase();
                 if (!this.letrasValidas.includes(letra, 0)) {
                     this.error = true
