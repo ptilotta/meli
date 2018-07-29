@@ -39,7 +39,7 @@ app.post('/mutant', function(req, res) {
     var mADN = new Adn(matriz.dna, 4, 2, "AGTC");
 
     // Realizo las validaciones
-    if (!mADN.validaciones) {
+    if (!mADN.validaciones()) {
         return res.status(400).json(mADN.mensajeError);
     }
 
