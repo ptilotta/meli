@@ -50,9 +50,9 @@ class Mutant {
             this.error = false;
             this.mensaje = {};
         }
+        grabacion();
     }
 
-    grabacion();
 }
 
 module.exports = Mutant;
