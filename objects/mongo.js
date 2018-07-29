@@ -29,15 +29,14 @@ class Mongo {
         this.uniqueMsg = uniqueMsg;
         let mch = mongoose.Schema;
 
+        // Intento borrar el Schema si es que fue definido anteriormente
         try {
-            try {
-                var esquema = new mch(Schema);
-                console.log(`nombre = ${nombre} esquema=${esquema}`);
+            delete mongoose.connection.models[nombre];
+        } catch (error) {}
 
-            } catch (error) {
-                var esquema = mch(Schema);
-                console.log(`El Error en AddSchema (1) es ${error}`);
-            }
+        try {
+            var esquema = new mch(Schema);
+            console.log(`nombre = ${nombre} esquema=${esquema}`);
             esquema.plugin(uniqueValidator, { message: uniqueMsg });
             this.modelo = mongoose.model(nombre, esquema);
             this.mensaje = {};
