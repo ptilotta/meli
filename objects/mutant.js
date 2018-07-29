@@ -28,7 +28,7 @@ class Mutant {
         // Seteo Schema MUTANT
         console.log('3. Voy a crear el Schema MUTANT');
         await mongoMutant.AddSchema('MUTANT', {
-            dna: { type: String, required: [true, 'Campo dna Requerido'] },
+            dna: { type: String, required: [true, 'Campo dna Requerido'], unique: true },
             mutante: { type: Boolean, required: [true, 'Campo mutante Requerido'] }
         }, process.env.MSGUNIQUE);
         if (mongoMutant.error) {
