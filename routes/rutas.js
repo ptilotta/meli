@@ -52,12 +52,14 @@ app.post('/mutant', function(req, res) {
             return res.status(400).json(mut.mensaje);
         };
 
-        // grabo registro en MongoDB de STATS
-        var stats = await new Stats;
-        await stats.graboStats(mutante);
-        if (mut.error) {
-            return res.status(400).json(stats.mensaje);
-        };
+        if (mut.grabarStats) {
+            // grabo registro en MongoDB de STATS
+            var stats = await new Stats;
+            await stats.graboStats(mutante);
+            if (mut.error) {
+                return res.status(400).json(stats.mensaje);
+            };
+        }
 
         // Envío respuesta al Navegador
         if (mutante) {

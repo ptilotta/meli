@@ -8,6 +8,7 @@ class Mutant {
     constructor() {
         this.error = false;
         this.mensaje = {};
+        this.grabarStats = true;
     }
 
     async graboMutant(adn, mutante) {
@@ -34,6 +35,10 @@ class Mutant {
         if (mongoMutant.error) {
             this.error = true;
             this.mensaje = mongoMutant.mensaje;
+        } else {
+            if (!mongoMutant.continue) {
+                this.grabarStats = false; // no graba las Stats si en el objeto Mongo viene un continue='false'
+            }
         }
         return;
     };

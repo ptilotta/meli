@@ -15,6 +15,7 @@ class Mongo {
         this.error = false; // Indica cuando hubo un error
         this.resultado = {}; // Almacena el objeto JSON resultado de los Find   
         this.url = url; // URI de la conexión
+        this.continue = true; // Indica si continua actualizando otras tablas luego de un error en esta Clase
     };
 
     /* 
@@ -87,10 +88,13 @@ class Mongo {
                 this.error = true;
                 this.mensaje = JSON.stringify(error);
             } else {
+                /* Si el error fue registro duplicado (no se permite mas de 1 ADN) no continua
+                                                       grabando las STATS */
+                this.continue = false;
                 this.error = false;
                 this.mensaje = {};
             };
-        }
+        };
     };
 
 

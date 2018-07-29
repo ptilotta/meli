@@ -20,7 +20,11 @@ class Stats {
         };
 
         // Seteo Schema
-        await mongoStats.AddSchema('STATS', process.env.SCHEMA_STATS, process.env.MSGUNIQUE);
+        await mongoStats.AddSchema('STATS', {
+            id: { type: Number, required: [true, 'Campo ID Requerido'] },
+            humanos: { type: Number, required: [true, 'Campo humanos Requerido'] },
+            mutantes: { type: Number, required: [true, 'Campo mutantes Requerido'] }
+        }, process.env.MSGUNIQUE);
 
         // Leo el primer registro de la colección
         await mongoStats.FindOne();
