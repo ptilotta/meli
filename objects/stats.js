@@ -59,26 +59,26 @@ class Stats {
     async graboStats(mutante) {
         console.log(' ********************* INICIO DE GRABOSTATS *************************** ');
         let mongoStats = await new Mongo(process.env.MongoURI);
-        await mongoStats.Connect().then(() => {
+        mongoStats.Connect().then(() => {
             if (mongoStats.error) {
                 this.error = true;
                 this.mensaje = mongoStats.mensaje;
                 return;
             }
-            await mongoStats.AddSchema('STATS', {
+            mongoStats.AddSchema('STATS', {
                 id: { type: Number, required: [true, 'Campo ID Requerido'] },
                 humanos: { type: Number, required: [true, 'Campo humanos Requerido'] },
                 mutantes: { type: Number, required: [true, 'Campo mutantes Requerido'] }
             }, process.env.MSGUNIQUE).then(() => {
 
                 // Leo el registro unico de Estadisticas
-                await mongoStats.FindOne().then(() => {
+                mongoStats.FindOne().then(() => {
                     let registros = Object.keys(mongoStats.resultado).length;
                     console.log(`Registros de FindOne ${registros}`);
                     if (registros === 0) {
 
                         // Si el registro no existe, crea uno
-                        await mongoStats.Save({
+                        mongoStats.Save({
                             id: 1,
                             humanos: 0,
                             mutantes: 0
@@ -89,12 +89,12 @@ class Stats {
                                 return;
                             }
                             if (mutante) {
-                                await mongoStats.Update({
+                                mongoStats.Update({
                                     id: 1,
                                     $inc: { mutantes: 1 }
                                 });
                             } else {
-                                await mongoStats.Update({
+                                mongoStats.Update({
                                     id: 1,
                                     $inc: { humanos: 1 }
                                 });
@@ -102,12 +102,12 @@ class Stats {
                         });
                     } else {
                         if (mutante) {
-                            await mongoStats.Update({
+                            mongoStats.Update({
                                 id: 1,
                                 $inc: { mutantes: 1 }
                             });
                         } else {
-                            await mongoStats.Update({
+                            mongoStats.Update({
                                 id: 1,
                                 $inc: { humanos: 1 }
                             });
