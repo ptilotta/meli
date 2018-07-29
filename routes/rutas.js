@@ -48,7 +48,7 @@ app.post('/mutant', function(req, res) {
     console.log(`******* el ADN chequeado es ${mutante}   ********`);
 
     // Graba registro en MongoDB
-
+    console.log('*** M U T A N T ***');
     var mut = new Mutant;
     mut.graboMutant(matriz.dna, mutante);
     if (mut.error) {
@@ -56,6 +56,7 @@ app.post('/mutant', function(req, res) {
     }
 
     // grabo STATS
+    console.log('*** S T A T S ***');
     var stats = new Stats;
     stats.graboStats(mutante);
     if (stats.error) {
