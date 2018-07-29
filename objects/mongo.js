@@ -15,7 +15,6 @@ class Mongo {
         this.error = false; // Indica cuando hubo un error
         this.resultado = {}; // Almacena el objeto JSON resultado de los Find   
         this.url = url; // URI de la conexión
-        this.Connect();
     };
 
     /* 
@@ -36,10 +35,10 @@ class Mongo {
         } catch (error) {}
     }
 
-    Connect() {
+    async Connect() {
 
         /* Conecta a la Base de Mongo */
-        mongoose.connect(this.url, { useNewUrlParser: true }, (err, res) => {
+        await mongoose.connect(this.url, { useNewUrlParser: true }, (err, res) => {
             if (err) {
                 this.status = 0;
                 this.mensaje = err;
