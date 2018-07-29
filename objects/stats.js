@@ -74,8 +74,12 @@ class Stats {
 
         // Leo el registro unico de Estadisticas
 
-        console.log(`%%%%% Entraré a FINDONE %%%%%%`);
         mongoStats.FindOne();
+        console.log(' ===================================================== ');
+        console.log('     R E S U L T A D O                                 ');
+        console.log(' ===================================================== ');
+        console.log(`${mongoStats.resultado}`);
+        console.log(' ===================================================== ');
         if (!mongoStats.resultado) {
 
             // Si el registro no existe, crea uno
