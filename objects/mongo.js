@@ -33,32 +33,34 @@ class Mongo {
         try {
             console.log(`nombre = ${nombre} esquema=${esquema}`);
             this.modelo = mongoose.model(nombre, esquema);
-            return;
+            this.mensaje = {};
+            this.error = false;
         } catch (error) {
-            return (error);
+            this.mensaje = error;
+            this.error = true;
         }
     };
 
 
 
-    Connect() {
+    async Connect() {
 
         /* Conecta a la Base de Mongo */
 
-        mongoose.connect(this.url, { useNewUrlParser: true }).then(() => {
+        try {
+            await mongoose.connect(this.url, { useNewUrlParser: true });
             this.status = 1;
             this.mensaje = {};
             this.error = false;
-            resolve(this.mensaje);
-        }).catch((err) => {
+
+        } catch (error) {
             this.status = 0;
-            this.mensaje = err;
+            this.mensaje = error;
             this.error = true;
-            reject(err);
-        });
+        }
     };
 
-    Save(datos) {
+    async Save(datos) {
         console.log('=====================================');
         console.log('           SAVE                      ');
         console.log('=====================================');
@@ -68,66 +70,63 @@ class Mongo {
             this.mensaje = JSON.stringify({
                 mensaje: 'Schema no definido, debe usar el método AddSchema'
             });
-            return (this.mensaje);
+            return;
         }
 
         let sch = new this.modelo(datos);
-        sch.save().then(() => {
+        try {
+            await sch.save();
             this.error = false;
             this.mensaje = {};
-            resolve(this.mensaje);
-        }).catch((err) => {
-
+        } catch (error) {
             // Chequea que el error generado no sea por campo duplicado
             // y de ser un error real, devuelve el status y el mensaje
 
-            if (!err.message.includes(this.uniqueMsg)) {
+            if (!error.message.includes(this.uniqueMsg)) {
                 this.error = true;
                 this.mensaje = JSON.stringify(err);
                 console.log(`ERROR EN SAVE : ${this.mensaje}`);
-                reject(this.mensaje);
             } else {
-                resolve(this.mensaje);
+                this.error = false;
+                this.mensaje = {};
             };
-        });
+        }
     };
 
 
-    FindOne() {
+    async FindOne() {
         console.log('=====================================');
         console.log('           FINDONE                   ');
         console.log('=====================================');
 
-        this.modelo.findOne().then(() => {
+        try {
+            let registro = await this.modelo.findOne();
+
             console.log(` EL RESULTADO DE FINDONE ES ${registro}`);
             if (registro) {
                 this.resultado = registro;
             } else {
                 this.resultado = {};
             }
-            resolve(this.resultado);
-        }).catch((err) => {
+        } catch (error) {
             this.error = true;
             this.mensaje = JSON.stringify(error);
             console.log('Hubo Error en FINDONE', error);
-            reject(err);
-        });
+        }
     };
 
-    Update(instruccion) {
+    async Update(instruccion) {
         console.log('=====================================');
         console.log('           UPDATE                    ');
         console.log('=====================================');
-        this.modelo.update().then(() => {
+        try {
+            await modelo.update();
             this.error = false;
             this.mensaje = {};
-            resolve(this.mensaje);
-        }).catch((err) => {
+        } catch (error) {
             this.error = true;
-            this.mensaje = JSON.stringify(err);
-            console.log(`Error en Update ${this.mensaje} para la instrucción ${instruccion}`);
-            reject(err);
-        });
+            this.mensaje = JSON.stringify(error);
+        }
     };
 };
 
