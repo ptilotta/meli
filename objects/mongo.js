@@ -61,7 +61,7 @@ class Mongo {
             return;
         }
         let sch = new this.modelo(datos);
-        console.log(`Los datos son ${JSON.stringify(dato)}`);
+        console.log(`Los datos son ${JSON.stringify(datos)}`);
         sch.save((err, results) => {
             this.error = false;
             this.mensaje = {};
