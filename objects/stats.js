@@ -86,9 +86,9 @@ class Stats {
 
             // Si el registro no existe, crea uno
             if (mutante) {
-                comando = { id: 1, humanos: 0, mutantes: 1 };
+                var comando = { id: 1, humanos: 0, mutantes: 1 };
             } else {
-                comando = { id: 1, humanos: 1, mutantes: 0 };
+                var comando = { id: 1, humanos: 1, mutantes: 0 };
             }
             await mongoStats.Save(comando);
             if (mongoStats.error) {
