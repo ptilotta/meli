@@ -175,14 +175,14 @@ class Adn {
                     }
                     break;
                 case "D":
-                    if (iteroporfila === false) {
+                    if (iteroporFila === false) {
                         actual_x = actual_x + Abs(incrementoColumna)
                         actual_y = desde
                         if (actual_x > (this.tabla[0].length - 1)) {
-                            iteroporfila = true;
+                            iteroporFila = true;
                         }
                     }
-                    if (iteroporfila = true) {
+                    if (iteroporFila = true) {
                         if (incrementoColumna < 0) {
                             actual_x = this.tabla[0].length - 1;
                         } else {
