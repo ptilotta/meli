@@ -30,9 +30,9 @@ class Mongo {
         let mch = mongoose.Schema;
 
         try {
-            console.log(`nombre = ${nombre} esquema=${esquema}`);
             try {
                 let esquema = new mch(Schema);
+                console.log(`nombre = ${nombre} esquema=${esquema}`);
 
             } catch (error) {
                 let esquema = mch(Schema);
