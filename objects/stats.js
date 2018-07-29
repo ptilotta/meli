@@ -21,11 +21,6 @@ class Stats {
 
         // Seteo Schema
         await mongoStats.AddSchema('STATS', process.env.SCHEMA_STATS, process.env.MSGUNIQUE);
-        if (mongoStats.error) {
-            this.error = true;
-            this.mensaje = mongoStats.error;
-            return;
-        };
 
         // Leo el primer registro de la colección
         await mongoStats.FindOne();
@@ -62,7 +57,6 @@ class Stats {
     };
 
     async graboStats(mutante) {
-        console.log(' ********************* INICIO DE GRABOSTATS *************************** ');
 
         // Creo el objeto Mongo y conecto a la Base de Datos
         let mongoStats = await new Mongo(process.env.MongoURI);
@@ -78,11 +72,6 @@ class Stats {
             humanos: { type: Number, required: [true, 'Campo humanos Requerido'] },
             mutantes: { type: Number, required: [true, 'Campo mutantes Requerido'] }
         }, process.env.MSGUNIQUE);
-        if (mongoStats.error) {
-            this.error = true;
-            this.mensaje = mongoStats.error;
-            return;
-        }
 
         // Leo el registro unico de Estadisticas
         await mongoStats.FindOne();
@@ -93,28 +82,34 @@ class Stats {
         }
 
         let registros = Object.keys(mongoStats.resultado).length;
-        console.log(`Registros de FindOne ${registros}`);
         if (registros === 0) {
 
             // Si el registro no existe, crea uno
-            await mongoStats.Save({ id: 1, humanos: 0, mutantes: 0 });
+            if (mutante) {
+                comando = { id: 1, humanos: 0, mutantes: 1 };
+            } else {
+                comando = { id: 1, humanos: 1, mutantes: 0 };
+            }
+            await mongoStats.Save(comando);
+            if (mongoStats.error) {
+                this.error = true;
+                this.mensaje = mongoStats.error;
+                return;
+            }
+        } else {
+
+            // Si hay un registro de totales, simplemente suma 1 al campo correspondiente
+            if (mutante) {
+                await mongoStats.Update({ id: 1, $inc: { mutantes: 1 } });
+            } else {
+                await mongoStats.Update({ id: 1, $inc: { humanos: 1 } });
+            }
             if (mongoStats.error) {
                 this.error = true;
                 this.mensaje = mongoStats.error;
                 return;
             }
         }
-        if (mutante) {
-            await mongoStats.Update({ id: 1, $inc: { mutantes: 1 } });
-        } else {
-            await mongoStats.Update({ id: 1, $inc: { humanos: 1 } });
-        }
-        if (mongoStats.error) {
-            this.error = true;
-            this.mensaje = mongoStats.error;
-            return;
-        }
-        console.log(' ********************* FIN DE GRABOSTATS *************************** ');
     };
 }
 

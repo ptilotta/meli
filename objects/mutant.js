@@ -31,11 +31,7 @@ class Mutant {
             dna: { type: String, required: [true, 'Campo dna Requerido'], unique: true },
             mutante: { type: Boolean, required: [true, 'Campo mutante Requerido'] }
         }, process.env.MSGUNIQUE);
-        if (mongoMutant.error) {
-            this.error = true;
-            this.mensaje = mongoMutant.mensaje;
-            return;
-        }
+
 
         // Grabo los datos en la Base de Datos
         console.log('4. Antes de ir a Save');
