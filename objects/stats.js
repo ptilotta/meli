@@ -30,7 +30,6 @@ class Stats {
         }
 
         this.error = false;
-        console.log(`MENSAJE : ${mongoStats.mensaje}`);
         if (!mongoStats.mensaje) {
 
             // Registro no existe
@@ -83,13 +82,11 @@ class Stats {
                 mutantes: 0
             });
             if (mongoStats.error) {
-                console.log(`Dio error MongoStats.Save ${mongoStats.mensaje}`);
                 this.error = true;
                 this.mensaje = mongoStats.mensaje;
                 return;
             }
         }
-        console.log('VOY A ACTUALIZAR LAS STATS');
         if (mutante) {
             mongoStats.Update({
                 id: 1,

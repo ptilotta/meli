@@ -58,7 +58,6 @@ class Mongo {
             this.mensaje = JSON.stringify({
                 mensaje: 'Schema no definido, debe usar el método AddSchema'
             });
-            console.log(this.mensaje);
             return;
         }
         let sch = new this.modelo(datos);
@@ -74,7 +73,7 @@ class Mongo {
                 if (!err.message.includes(this.uniqueMsg)) {
                     this.error = true;
                     this.mensaje = JSON.stringify(err);
-                    console.log(this.mensaje);
+                    console.log(`ERROR EN SAVE : ${this.mensaje}`);
                     return;
                 }
             }
@@ -96,7 +95,6 @@ class Mongo {
                 console.log('Hubo Error en FINDONE', err);
                 return;
             }
-            console.log(`RES = ${res}`);
             if (!res === null) {
                 this.resultado = res;
             } else {
