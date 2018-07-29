@@ -46,7 +46,10 @@ app.post('/mutant', function(req, res) {
     // Llamado a la función Principal, que devuelve False o True si el ADN es Mutante
     mutante = mADN.isMutant();
     console.log(`******* el ADN chequeado es ${mutante}   ********`);
+
     // Graba registro en MongoDB
+
+    console.log('********** VOY A ENTRAR A GRABOMUTANT ***********');
     var mut = new Mutant;
     mut.graboMutant(matriz.dna, mutante);
     if (mut.error) {
@@ -54,6 +57,7 @@ app.post('/mutant', function(req, res) {
     }
 
     // grabo STATS
+    console.log('********** VOY A ENTRAR A GRABOSTATS ***********');
     var stats = new Stats;
     stats.graboStats(mutante);
     if (stats.error) {
