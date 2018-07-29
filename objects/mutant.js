@@ -12,7 +12,7 @@ class Mutant {
 
     async graboMutant(adn, mutante) {
 
-        let grabacion = async() => {
+        async function grabar() {
             console.log('1. Inicio GraboMutant');
             let mongoMutant = await new Mongo(process.env.MongoURI);
             await mongoMutant.Connect();
