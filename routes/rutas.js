@@ -47,7 +47,7 @@ app.post('/mutant', function(req, res) {
     console.log(`******* el ADN chequeado es ${mutante}   ********`);
 
 
-    let graboM = new Promisse((resolve, reject) => {
+    let graboM = new Promise((resolve, reject) => {
         // Graba registro en MongoDB de ADN
         console.log('*** M U T A N T ***');
         var mut = new Mutant;
@@ -59,7 +59,7 @@ app.post('/mutant', function(req, res) {
         });
 
     });
-    let graboS = new Promisse((resolve, reject) => {
+    let graboS = new Promise((resolve, reject) => {
         // grabo registro en MongoDB de STATS
         console.log('*** S T A T S ***');
         var stats = new Stats;
