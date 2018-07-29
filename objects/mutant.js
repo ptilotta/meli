@@ -30,7 +30,7 @@ class Mutant {
 
                 // Grabo los datos en la Base de Datos
                 console.log('4. Antes de ir a Save');
-                mongoMutant.Save({
+                await mongoMutant.Save({
                     dna: adn,
                     mutante
                 }).then(() => {
@@ -42,7 +42,7 @@ class Mutant {
                         this.mensaje = mongoMutant.mensaje;
                         return;
                     }
-                    await console.log('6. Fin de GraboMutant');
+                    console.log('6. Fin de GraboMutant');
                     this.error = false;
                     this.mensaje = {};
                 });
