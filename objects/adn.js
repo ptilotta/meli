@@ -119,8 +119,7 @@ class Adn {
             iterar = true;
             while (iterar) {
                 t = this.tabla[y].substr((x + 1), 1);
-                console.log(`y = ${y} x = ${x} this.tabla[y]=${this.tabla[y]} tipo = ${tipo}`);
-                if (ultCaracter === t && ultCaracter.length > 0) {
+                if (ultCaracter === t) {
                     contador += 1;
                 } else {
                     ultCaracter = t;
@@ -156,47 +155,47 @@ class Adn {
                         break;
                 }
             }
-        }
-        switch (tipo) {
-            case "V":
-                actual_y = desde;
-                actual_x += 1;
-                if (actual_x > (this.tabla[0].length - 1)) {
-                    return;
-                }
-                break;
-            case "H":
-                actual_y += 1;
-                actual_x = desde2;
-                if (actual_y > (this.tabla.length - 1)) {
-                    return;
-                }
-                break;
-            case "D":
-                if (iteroporfila === false) {
-                    actual_x = actual_x + Abs(incrementoColumna)
-                    actual_y = desde
+            switch (tipo) {
+                case "V":
+                    actual_y = desde;
+                    actual_x += 1;
                     if (actual_x > (this.tabla[0].length - 1)) {
-                        iteroporfila = true;
+                        return;
                     }
-                }
-                if (iteroporfila = true) {
-                    if (incrementoColumna < 0) {
-                        actual_x = this.tabla[0].length - 1;
-                    } else {
-                        actual_x = desde2;
+                    break;
+                case "H":
+                    actual_y += 1;
+                    actual_x = desde2;
+                    if (actual_y > (this.tabla.length - 1)) {
+                        return;
                     }
-                    actual_y += Math.abs(incrementoFila);
-                }
+                    break;
+                case "D":
+                    if (iteroporfila === false) {
+                        actual_x = actual_x + Abs(incrementoColumna)
+                        actual_y = desde
+                        if (actual_x > (this.tabla[0].length - 1)) {
+                            iteroporfila = true;
+                        }
+                    }
+                    if (iteroporfila = true) {
+                        if (incrementoColumna < 0) {
+                            actual_x = this.tabla[0].length - 1;
+                        } else {
+                            actual_x = desde2;
+                        }
+                        actual_y += Math.abs(incrementoFila);
+                    }
 
-                if (actual_y > this.tabla.length - 1) {
-                    return;
-                }
-                break;
-        }
-        y = actual_y;
-        x = actual_x;
+                    if (actual_y > this.tabla.length - 1) {
+                        return;
+                    }
+                    break;
+            }
+            y = actual_y;
+            x = actual_x;
+        };
     };
-}
+};
 
 module.exports = Adn;
