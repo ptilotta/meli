@@ -47,37 +47,33 @@ app.post('/mutant', function(req, res) {
     console.log(`******* el ADN chequeado es ${mutante}   ********`);
 
 
-    let graboMutant = () => {
-        return new promisse((resolve, reject) => {
-            // Graba registro en MongoDB
-            console.log('*** M U T A N T ***');
-            var mut = new Mutant;
-            let gm = mut.graboMutant(matriz.dna, mutante);
-            gm.then(() => {
-                resolve(mut.mensaje);
-            }, (err) => {
-                reject(res.status(400).json(mut.mensaje));
-            });
+    let graboM = new promisse((resolve, reject) => {
+        // Graba registro en MongoDB de ADN
+        console.log('*** M U T A N T ***');
+        var mut = new Mutant;
+        let gm = mut.graboMutant(matriz.dna, mutante);
+        gm.then(() => {
+            resolve(mut.mensaje);
+        }, (err) => {
+            reject(res.status(400).json(mut.mensaje));
         });
-    };
+    });
 
-    let graboStats = () => {
-        return new promisse((resolve, reject) => {
-            // grabo STATS
-            console.log('*** S T A T S ***');
-            var stats = new Stats;
-            let gs = stats.graboStats(mutante);
-            gs.then(() => {
-                resolve(stats.mensaje);
-            }, (err) => {
-                reject(res.status(400).json(stats.mensaje));
-            });
+
+    let graboS = new promisse((resolve, reject) => {
+        // grabo registro en MongoDB de STATS
+        console.log('*** S T A T S ***');
+        var stats = new Stats;
+        let gs = stats.graboStats(mutante);
+        gs.then(() => {
+            resolve(stats.mensaje);
+        }, (err) => {
+            reject(res.status(400).json(stats.mensaje));
         });
-    };
+    });
 
-
-    graboMutant().then(() => {
-        graboStats();
+    graboM().then(() => {
+        grabS();
     });
 
     // Envío respuesta al Navegador
