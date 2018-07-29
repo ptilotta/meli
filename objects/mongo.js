@@ -23,7 +23,7 @@ class Mongo {
       @uniqueMsg = Mensaje para el error de Unique Validator
     */
     AddSchema(nombre, Schema, uniqueMsg) {
-        return new promisse((resolve, reject) => {
+        return new promise((resolve, reject) => {
 
             /* Crea un Schema para este objeto */
 
@@ -64,7 +64,7 @@ class Mongo {
     };
 
     Save(datos) {
-        return new promisse((resolve, reject) => {
+        return new promise((resolve, reject) => {
             console.log('=====================================');
             console.log('           SAVE                      ');
             console.log('=====================================');
@@ -101,7 +101,7 @@ class Mongo {
 
 
     FindOne() {
-        return new promisse((resolve, reject) => {
+        return new promise((resolve, reject) => {
 
             console.log('=====================================');
             console.log('           FINDONE                   ');
@@ -126,7 +126,7 @@ class Mongo {
     };
 
     Update(instruccion) {
-        return new promisse((resolve, reject) => {
+        return new promise((resolve, reject) => {
             console.log('=====================================');
             console.log('           UPDATE                    ');
             console.log('=====================================');

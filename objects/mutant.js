@@ -11,7 +11,7 @@ class Mutant {
     }
 
     graboMutant(adn, mutante) {
-        return new promisse((resolve, reject) => {
+        return new promise((resolve, reject) => {
 
             console.log('1. Inicio GraboMutant');
             let mongoMutant = new Mongo(process.env.MongoURI);

@@ -10,7 +10,7 @@ class Stats {
     }
 
     obtengoStats() {
-        return new promisse((resolve, reject) => {
+        return new promise((resolve, reject) => {
 
             let mongoStats = new Mongo(process.env.MongoURI);
             mongoStats.Connect().then(() => {
@@ -67,7 +67,7 @@ class Stats {
     };
 
     graboStats(mutante) {
-        return new promisse((resolve, reject) => {
+        return new promise((resolve, reject) => {
             console.log(' ********************* INICIO DE GRABOSTATS *************************** ');
             let mongoStats = new Mongo(process.env.MongoURI);
             let connect = mongoStats.Connect();
