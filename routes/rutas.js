@@ -47,7 +47,7 @@ app.post('/mutant', function(req, res) {
     console.log(`******* el ADN chequeado es ${mutante}   ********`);
 
 
-    let graboM = new promisse((resolve, reject) => {
+    let graboM = new Promisse((resolve, reject) => {
         // Graba registro en MongoDB de ADN
         console.log('*** M U T A N T ***');
         var mut = new Mutant;
@@ -57,10 +57,9 @@ app.post('/mutant', function(req, res) {
         }, (err) => {
             reject(res.status(400).json(mut.mensaje));
         });
+
     });
-
-
-    let graboS = new promisse((resolve, reject) => {
+    let graboS = new Promisse((resolve, reject) => {
         // grabo registro en MongoDB de STATS
         console.log('*** S T A T S ***');
         var stats = new Stats;
@@ -73,7 +72,7 @@ app.post('/mutant', function(req, res) {
     });
 
     graboM().then(() => {
-        grabS();
+        grabS().then(() => {});
     });
 
     // Envío respuesta al Navegador
@@ -83,5 +82,4 @@ app.post('/mutant', function(req, res) {
         return res.status(403).json();
     }
 });
-
 module.exports = app;
