@@ -149,6 +149,10 @@ class Adn {
                     case "D":
                         x += incrementoColumna;
                         y += incrementoFila;
+                        if (y > this.tabla.length - 1) {
+                            iterar = false;
+                            break;
+                        }
                         if (x < 0 || y < 0 || x > (this.tabla[y].length - 1) || y > this.tabla.length) {
                             iterar = false;
                         }
