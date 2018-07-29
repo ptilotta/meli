@@ -15,11 +15,15 @@ const app = express();
 app.get('/stats', function(req, res) {
 
     var stats = new Stats;
-    stats.obtengoStats().then(() => {
-        res.status(200).json(stats.mensaje);
-    }).catch((err) => {
-        res.status(400).json(stats.mensaje);
-    });
+    let lasStats = async() => {
+        await stats.obtengoStats();
+        if (stats.error) {
+            res.status(400).json(stats.mensaje);
+        } else {
+            res.status(200).json(stats.mensaje);
+        }
+    }
+    lasStats();
 });
 
 //-----------------------------------------------------------------------

@@ -11,15 +11,18 @@ class Stats {
 
     async obtengoStats() {
 
+        console.log('Voy a conectar');
         let mongoStats = await new Mongo(process.env.MongoURI);
         await mongoStats.Connect();
         if (mongoStats.error) {
+            console.log(`conectar dio error ${mongoStats.error}`);
             this.error = true;
             this.mensaje = mongoStats.error;
             return;
         };
 
         // Seteo Schema
+        console.log('Voy a AddSchema');
         await mongoStats.AddSchema('STATS', {
             id: { type: Number, required: [true, 'Campo ID Requerido'] },
             humanos: { type: Number, required: [true, 'Campo humanos Requerido'] },
@@ -27,29 +30,40 @@ class Stats {
         }, process.env.MSGUNIQUE);
 
         // Leo el primer registro de la colección
+        console.log('Voy a FindOne');
         await mongoStats.FindOne();
         if (mongoStats.error) {
+            console.log(`FindOne dio error ${mongoStats.error}`);
+
             this.error = true;
             this.mensaje = mongoStats.error;
             return;
         };
 
         // Chequeo si había registro de Totales ya creado
+        console.log('Voy a Chequear mongoStats.mensaje');
         if (!mongoStats.mensaje) {
             this.error = false;
 
             // Registro no existe
-            this.mensaje = process.env.SIN_REGISTROS;
+            console.log('envio VACIO');
+            this.mensaje = {
+                'count_mutant_dna': 0,
+                'count_human_dna': 0,
+                'ratio': 0
+            };
         } else {
 
             // Registro de Stats existente
             if (mongoStats.mensaje.humanos > 0) {
+                console.log(`envio humanos + mutantes ( mutantes = ${mongoStats.mensaje.mutantes}, humanos = ${mongoStats.mensaje.humanos}) `);
                 this.mensaje = {
                     'count_mutant_dna': mongoStats.mensaje.mutantes,
                     'count_human_dna': mongoStats.mensaje.humanos,
                     'ratio': `${ mongoStats.mensaje.mutantes / mongoStats.mensaje.humanos}`
                 };
             } else {
+                console.log(`envio humanos + mutantes ( mutantes = ${mongoStats.mensaje.mutantes}) `);
                 this.mensaje = {
                     'count_mutant_dna': mongoStats.mensaje.mutantes,
                     'count_human_dna': mongoStats.mensaje.humanos,
