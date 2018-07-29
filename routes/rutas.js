@@ -51,6 +51,7 @@ app.post('/mutant', function(req, res) {
     console.log('*** M U T A N T ***');
     var mut = new Mutant;
     mut.graboMutant(matriz.dna, mutante).then(() => {
+        console.log('Salio del GraboMutant');
         if (mut.error) {
             return res.status(400).json(mut.mensaje);
         }
