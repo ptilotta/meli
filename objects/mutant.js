@@ -28,7 +28,7 @@ class Mutant {
         // Grabo los datos en la Base de Datos
         console.log('Estoy aquí a punto de entrar en mongoMutant.Save');
         mongoMutant.Save({
-            adn,
+            dna: adn,
             mutante
         });
 

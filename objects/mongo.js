@@ -84,11 +84,11 @@ class Mongo {
         });
     }
 
-    FindOne() {
+    async FindOne() {
         console.log('=====================================');
         console.log('           FINDONE                   ');
         console.log('=====================================');
-        this.modelo.findOne((err, res) => {
+        await this.modelo.findOne((err, res) => {
             if (err) {
                 this.error = true;
                 this.mensaje = JSON.stringify(err);
