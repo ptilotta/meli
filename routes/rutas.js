@@ -52,21 +52,20 @@ app.post('/mutant', function(req, res) {
         // Graba registro en MongoDB
         console.log('*** M U T A N T ***');
         var mut = await new Mutant;
-        await mut.graboMutant(matriz.dna, mutante).then(() => {
+        await mut.graboMutant(matriz.dna, mutante);
 
-            if (mut.error) {
-                return res.status(400).json(mut.mensaje);
-            }
+        if (mut.error) {
+            return res.status(400).json(mut.mensaje);
+        };
 
-            // grabo STATS
-            console.log('*** S T A T S ***');
-            var stats = await new Stats;
-            await stats.graboStats(mutante).then(() => {
-                if (stats.error) {
-                    return res.status(400).json(stats.mensaje);
-                }
-            });
-        });
+        // grabo STATS
+        console.log('*** S T A T S ***');
+        var stats = await new Stats;
+        await stats.graboStats(mutante);
+
+        if (stats.error) {
+            return res.status(400).json(stats.mensaje);
+        }
     };
 
     graboMongo();
