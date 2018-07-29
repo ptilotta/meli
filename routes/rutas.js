@@ -50,7 +50,7 @@ app.post('/mutant', function(req, res) {
     // Graba registro en MongoDB
     console.log('*** M U T A N T ***');
     var mut = new Mutant;
-    mut.graboMutant(matriz.dna, mutante).then(() => {
+    await mut.graboMutant(matriz.dna, mutante).then(() => {
         if (mut.error) {
             return res.status(400).json(mut.mensaje);
         }
