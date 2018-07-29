@@ -24,7 +24,6 @@ class Stats {
 
         mongoStats.FindOne();
         if (mongoStats.error) {
-            console.log(`Hubo Error en FINDONE !!! mira esto ${mongoStats.mensaje}`);
             this.error = true;
             this.mensaje = mongoStats.mensaje;
             return;
@@ -75,12 +74,7 @@ class Stats {
         // Leo el registro unico de Estadisticas
 
         mongoStats.FindOne();
-        console.log(' ===================================================== ');
-        console.log('     R E S U L T A D O                                 ');
-        console.log(' ===================================================== ');
-        console.log(`${mongoStats.resultado}`);
-        console.log(' ===================================================== ');
-        if (!mongoStats.resultado) {
+        if (Object.keys(mongoStats.resultado).length === 0) {
 
             // Si el registro no existe, crea uno
             mongoStats.Save({

@@ -25,7 +25,6 @@ class Mongo {
     */
     AddSchema(nombre, Schema, uniqueMsg) {
 
-        console.log('Entre a crear el Schema !');
         /* Crea un Schema para este objeto */
         this.uniqueMs = uniqueMsg;
         let sch = mongoose.Schema;
@@ -37,13 +36,11 @@ class Mongo {
     Connect() {
 
         /* Conecta a la Base de Mongo */
-        console.log('Conectando con la BD !!!! debería ser el primer CLG');
         mongoose.connect(this.url, { useNewUrlParser: true }, (err, res) => {
             if (err) {
                 this.status = 0;
                 this.mensaje = err;
                 this.error = true;
-                console.log('Connect dio error', err);
                 return;
             }
             this.status = 1;
@@ -96,6 +93,7 @@ class Mongo {
             if (err) {
                 this.error = true;
                 this.mensaje = JSON.stringify(err);
+                console.log('Hubo Error en FINDONE', err);
                 return;
             }
             console.log(`RES = ${res}`);
