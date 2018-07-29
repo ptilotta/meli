@@ -73,7 +73,9 @@ class Stats {
         // Leo el registro unico de Estadisticas
 
         await mongoStats.FindOne();
-        if (Object.keys(mongoStats.resultado).length === 0) {
+        let registros = Object.keys(mongoStats.resultado).length;
+        console.log(`Registros de FindOne ${registros}`);
+        if (registros === 0) {
 
             // Si el registro no existe, crea uno
             await mongoStats.Save({
