@@ -10,7 +10,7 @@ process.env.PORT = process.env.PORT || 3000;
 
 // Define el mensaje de error para campos UNIQUE 
 
-process.env.MSGUNIQUE = { message: '{PATH} debe de ser único' };
+process.env.MSGUNIQUE = { message: 'ValidationError: dna:' };
 
 // Define el Schema para el servicio Stats
 
