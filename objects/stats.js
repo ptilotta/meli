@@ -56,15 +56,17 @@ class Stats {
         }
     }
 
-    graboStats(mutante) {
-        let mongoStats = new Mongo(process.env.MongoURI);
+    async graboStats(mutante) {
+        console.log(' ********************* INICIO DE GRABOSTATS *************************** ');
+        let mongoStats = await new Mongo(process.env.MongoURI);
+        await mongoStats.Connect();
         if (mongoStats.error) {
             this.error = true;
             this.mensaje = mongoStats.mensaje;
             return;
         }
 
-        mongoStats.AddSchema('STATS', {
+        await mongoStats.AddSchema('STATS', {
             id: { type: Number, required: [true, 'Campo ID Requerido'] },
             humanos: { type: Number, required: [true, 'Campo humanos Requerido'] },
             mutantes: { type: Number, required: [true, 'Campo mutantes Requerido'] }
@@ -72,13 +74,13 @@ class Stats {
 
         // Leo el registro unico de Estadisticas
 
-        mongoStats.FindOne();
+        await mongoStats.FindOne();
         let registros = Object.keys(mongoStats.resultado).length;
         console.log(`Registros de FindOne ${registros}`);
         if (registros === 0) {
 
             // Si el registro no existe, crea uno
-            mongoStats.Save({
+            await mongoStats.Save({
                 id: 1,
                 humanos: 0,
                 mutantes: 0
@@ -90,12 +92,12 @@ class Stats {
             }
         }
         if (mutante) {
-            mongoStats.Update({
+            await mongoStats.Update({
                 id: 1,
                 $inc: { mutantes: 1 }
             });
         } else {
-            mongoStats.Update({
+            await mongoStats.Update({
                 id: 1,
                 $inc: { humanos: 1 }
             });
@@ -105,6 +107,7 @@ class Stats {
             this.error = true;
             this.mensaje = mongoStats.mensaje;
         }
+        console.log(' ********************* FIN DE GRABOSTATS *************************** ');
     }
 }
 
