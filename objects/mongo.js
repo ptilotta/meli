@@ -30,12 +30,19 @@ class Mongo {
         let sch = mongoose.Schema;
         try {
             console.log(`nombre = ${nombre} esquema=${esquema}`);
-            let esquema = new sch(Schema);
+            try {
+                let esquema = new sch(Schema);
+
+            } catch (error) {
+                let esquema = sch(Schema);
+                console.log(`El Error en AddSchema es ${error}`);
+            }
             esquema.plugin(uniqueValidator, { message: uniqueMsg });
             this.modelo = mongoose.model(nombre, esquema);
             this.mensaje = {};
             this.error = false;
         } catch (error) {
+            console.log(`El Error en AddSchema es ${error}`);
             this.mensaje = error;
             this.error = true;
         }
@@ -66,7 +73,6 @@ class Mongo {
         console.log('=====================================');
 
         if (this.modelo === undefined) {
-            console.log('me fui por aca');
             this.error = true;
             this.mensaje = JSON.stringify({
                 mensaje: 'Schema no definido, debe usar el método AddSchema'
