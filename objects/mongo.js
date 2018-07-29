@@ -31,19 +31,19 @@ class Mongo {
 
         try {
             try {
-                let esquema = new mch(Schema);
+                var esquema = new mch(Schema);
                 console.log(`nombre = ${nombre} esquema=${esquema}`);
 
             } catch (error) {
-                let esquema = mch(Schema);
-                console.log(`El Error en AddSchema es ${error}`);
+                var esquema = mch(Schema);
+                console.log(`El Error en AddSchema (1) es ${error}`);
             }
             esquema.plugin(uniqueValidator, { message: uniqueMsg });
             this.modelo = mongoose.model(nombre, esquema);
             this.mensaje = {};
             this.error = false;
         } catch (error) {
-            console.log(`El Error en AddSchema es ${error}`);
+            console.log(`El Error en AddSchema (2) es ${error}`);
             this.mensaje = error;
             this.error = true;
         }
