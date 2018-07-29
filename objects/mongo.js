@@ -22,7 +22,7 @@ class Mongo {
       @schema = definición del Schema
       @uniqueMsg = Mensaje para el error de Unique Validator
     */
-    AddSchema(nombre, Schema, uniqueMsg) {
+    async AddSchema(nombre, Schema, uniqueMsg) {
 
         /* Crea un Schema para este objeto */
         this.uniqueMs = uniqueMsg;
@@ -31,7 +31,7 @@ class Mongo {
         esquema.plugin(uniqueValidator, { message: uniqueMsg });
         try {
             console.log(`nombre = ${nombre} esquema=${esquema}`);
-            this.modelo = mongoose.model(nombre, esquema);
+            this.modelo = await mongoose.model(nombre, esquema);
         } catch (error) {}
     }
 

@@ -12,7 +12,6 @@ class Adn {
     */
 
     constructor(adn, largoString, ocurrencias, letrasValidas) {
-        console.log('> ADN Constructor');
         this.tabla = [];
         this.largoString = largoString;
         this.ocurrencias = ocurrencias;
@@ -29,7 +28,6 @@ class Adn {
     }
 
     validaciones() {
-        console.log('> ADN Validaciones');
         if (!this.validoLongitudValida()) {
             return false;
         };
@@ -40,7 +38,6 @@ class Adn {
     }
 
     validoLongitudValida() {
-        console.log('> ADN ValidoLongitudValida');
         let longitudElemento = 0;
         let longitud = 0;
         this.error = false;
@@ -62,7 +59,6 @@ class Adn {
     }
 
     chequeoLetrasValidas() {
-        console.log('> ADN chequeoLetrasValidas');
         this.error = false;
         this.mensajeError = {};
         for (var i = 0; i < this.tabla.length; i++) {
@@ -80,7 +76,6 @@ class Adn {
     }
 
     isMutant() {
-        console.log('> ADN isMutant');
 
         this.recorroMatriz("H", 0, 0, 0, 0); // Recorrido Horizontal
         if (this.camposMutantes >= this.ocurrencias) { return true; }
@@ -98,7 +93,6 @@ class Adn {
     }
 
     recorroMatriz(tipo, desde, desde2, incrementoFila, incrementoColumna) {
-        console.log('> ADN recorroMatriz');
         let contador = 1,
             x, y, actual_y, actual_x, iteroporFila = false,
             ultCaracter = '',
