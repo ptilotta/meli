@@ -28,10 +28,10 @@ class Mongo {
 
         this.uniqueMs = uniqueMsg;
         let sch = mongoose.Schema;
-        let esquema = new sch(Schema);
-        esquema.plugin(uniqueValidator, { message: uniqueMsg });
         try {
             console.log(`nombre = ${nombre} esquema=${esquema}`);
+            let esquema = new sch(Schema);
+            esquema.plugin(uniqueValidator, { message: uniqueMsg });
             this.modelo = mongoose.model(nombre, esquema);
             this.mensaje = {};
             this.error = false;
