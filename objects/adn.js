@@ -77,6 +77,7 @@ class Adn {
 
     isMutant() {
 
+        console.log(`Ocurrencias necesarias = ${this.ocurrencias}`);
         this.recorroMatriz("H", 0, 0, 0, 0); // Recorrido Horizontal
         if (this.camposMutantes >= this.ocurrencias) { return true; }
 

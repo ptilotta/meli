@@ -27,7 +27,7 @@ app.get('/stats', function(req, res) {
 //-----------------------------------------------------------------------
 app.post('/mutant', function(req, res) {
     const matriz = req.body;
-    let mutante = false;
+    var mutante = false;
 
     // Valido que venga un JSON con la Matriz de ADN
     if (matriz.dna === undefined) {
@@ -43,6 +43,7 @@ app.post('/mutant', function(req, res) {
     }
     // Llamado a la función Principal, que devuelve False o True si el ADN es Mutante
     mutante = mADN.isMutant();
+    console.log(`El ADN revisado es mutante = ${mutante}`);
 
     let graboInfo = async() => {
         // Graba registro en MongoDB de ADN
