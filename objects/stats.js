@@ -31,10 +31,10 @@ class Stats {
         }
 
         this.error = false;
+        console.log(`MENSAJE : ${mongoStats.mensaje}`);
         if (!mongoStats.mensaje) {
 
             // Registro no existe
-            console.log('!mongoStats.mensaje >>>>>>>');
             this.mensaje = process.env.SIN_REGISTROS;
             return;
 
@@ -74,11 +74,16 @@ class Stats {
 
         // Leo el registro unico de Estadisticas
 
+        console.log(`%%%%% Entraré a FINDONE %%%%%%`);
         mongoStats.FindOne();
         if (!mongoStats.resultado) {
 
             // Si el registro no existe, crea uno
-            mongoStats.Save(process.env.REGISTRO_VACIO);
+            mongoStats.Save({
+                id: 1,
+                humanos: 0,
+                mutantes: 0
+            });
             if (mongoStats.error) {
                 this.error = true;
                 this.mensaje = mongoStats.mensaje;
@@ -86,9 +91,15 @@ class Stats {
             }
         }
         if (mutante) {
-            mongoStats.Update(process.env.SUMA_MUTANTES);
+            mongoStats.Update({
+                id: 1,
+                $inc: { mutantes: 1 }
+            });
         } else {
-            mongoStats.Update(process.env.SUMA_HUMANOS);
+            mongoStats.Update({
+                id: 1,
+                $inc: { humanos: 1 }
+            });
         }
         if (mongoStats.error) {
             this.error = true;
