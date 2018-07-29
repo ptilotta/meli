@@ -26,7 +26,7 @@ class Mongo {
 
         /* Crea un Schema para este objeto */
 
-        this.uniqueMs = uniqueMsg;
+        this.uniqueMsg = uniqueMsg;
         let mch = mongoose.Schema;
 
         try {
