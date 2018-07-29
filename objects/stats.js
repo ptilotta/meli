@@ -73,6 +73,7 @@ class Stats {
         // Leo el registro unico de Estadisticas
 
         mongoStats.FindOne();
+        console.log(`LARGO DE RESULTADO ES ${Object.keys(mongoStats.resultado).length}`);
         if (Object.keys(mongoStats.resultado).length === 0) {
 
             // Si el registro no existe, crea uno

@@ -36,7 +36,7 @@ process.env.REGISTRO_VACIO = {
 
 process.env.SCHEMA_MUTANT = {
     dna: { type: String, required: [true, 'Campo dna Requerido'] },
-    mutantes: { type: Boolean, required: [true, 'Campo mutante Requerido'] }
+    mutante: { type: Boolean, required: [true, 'Campo mutante Requerido'] }
 };
 
 process.env.SUMA_HUMANOS = {
