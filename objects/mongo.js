@@ -31,6 +31,7 @@ class Mongo {
         let esquema = new sch(Schema)
         esquema.plugin(uniqueValidator, { message: uniqueMsg });
         try {
+            console.log(`nombre = ${nombre} esquema=${esquema}`);
             this.modelo = mongoose.model(nombre, esquema);
         } catch (error) {}
     }
