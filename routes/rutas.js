@@ -71,7 +71,7 @@ app.post('/mutant', function(req, res) {
     };
 
 
-    graboMongo().then(() => {
+    graboMutant().then(() => {
         graboStats();
     });
 
