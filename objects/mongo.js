@@ -30,7 +30,9 @@ class Mongo {
         let sch = mongoose.Schema;
         let esquema = new sch(Schema)
         esquema.plugin(uniqueValidator, { message: uniqueMsg });
-        this.modelo = mongoose.model(nombre, esquema);
+        try {
+            this.modelo = mongoose.model(nombre, esquema);
+        } catch (error) {}
     }
 
     async Connect() {

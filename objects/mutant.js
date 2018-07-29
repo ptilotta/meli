@@ -10,7 +10,7 @@ class Mutant {
         this.mensaje = {};
     }
 
-    graboMutant(adn, mutante) {
+    async graboMutant(adn, mutante) {
         let mongoMutant = new Mongo(process.env.MongoURI);
         if (mongoMutant.error === true) {
             this.error = true;
@@ -20,14 +20,13 @@ class Mutant {
 
         // Seteo Schema MUTANT
 
-        mongoMutant.AddSchema('MUTANT', {
+        await mongoMutant.AddSchema('MUTANT', {
             dna: { type: String, required: [true, 'Campo dna Requerido'] },
             mutante: { type: Boolean, required: [true, 'Campo mutante Requerido'] }
         }, process.env.MSGUNIQUE);
 
         // Grabo los datos en la Base de Datos
-        console.log('Estoy aquí a punto de entrar en mongoMutant.Save');
-        mongoMutant.Save({
+        await mongoMutant.Save({
             dna: adn,
             mutante
         });
