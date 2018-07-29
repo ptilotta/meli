@@ -39,7 +39,6 @@ class Mutant {
             });
 
             console.log('5. despues de Save');
-            console.log(`mongoMutant.error = ${mongoMutant.error}`);
             if (mongoMutant.error === true) {
                 console.log('Dio Error mongoMutant.Save !!!', this.mensaje);
                 this.error = true;
@@ -50,7 +49,9 @@ class Mutant {
             this.error = false;
             this.mensaje = {};
         }
-        procesar();
+        procesar().then(() => {
+            console.log('SALIO POR EL THEN');
+        });
     }
 
 }
