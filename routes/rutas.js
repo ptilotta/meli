@@ -49,7 +49,6 @@ app.post('/mutant', function(req, res) {
 
     // Graba registro en MongoDB
 
-    console.log('********** VOY A ENTRAR A GRABOMUTANT ***********');
     var mut = new Mutant;
     mut.graboMutant(matriz.dna, mutante);
     if (mut.error) {
@@ -57,7 +56,6 @@ app.post('/mutant', function(req, res) {
     }
 
     // grabo STATS
-    console.log('********** VOY A ENTRAR A GRABOSTATS ***********');
     var stats = new Stats;
     stats.graboStats(mutante);
     if (stats.error) {

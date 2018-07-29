@@ -33,10 +33,10 @@ class Mongo {
         this.modelo = mongoose.model(nombre, esquema);
     }
 
-    Connect() {
+    async Connect() {
 
         /* Conecta a la Base de Mongo */
-        mongoose.connect(this.url, { useNewUrlParser: true }, (err, res) => {
+        await mongoose.connect(this.url, { useNewUrlParser: true }, (err, res) => {
             if (err) {
                 this.status = 0;
                 this.mensaje = err;
@@ -49,7 +49,7 @@ class Mongo {
         })
     };
 
-    Save(datos) {
+    async Save(datos) {
         console.log('=====================================');
         console.log('           SAVE                      ');
         console.log('=====================================');
@@ -61,8 +61,7 @@ class Mongo {
             return;
         }
         let sch = new this.modelo(datos);
-        console.log(`Los datos son ${JSON.stringify(datos)}`);
-        sch.save((err, results) => {
+        await sch.save((err, results) => {
             this.error = false;
             this.mensaje = {};
             if (err) {
@@ -97,18 +96,20 @@ class Mongo {
             }
             console.log(` EL RESULTADO DE FINDONE ES ${res}`);
             if (!res === null) {
+                console.log('RES NOT NULL');
                 this.resultado = res;
             } else {
+                console.log('RES NULL');
                 this.resultado = {};
             }
         })
     };
 
-    Update(instruccion) {
+    async Update(instruccion) {
         console.log('=====================================');
         console.log('           UPDATE                    ');
         console.log('=====================================');
-        this.modelo.update(instruccion, (err, res) => {
+        await this.modelo.update(instruccion, (err, res) => {
             if (err) {
                 this.error = true;
                 this.mensaje = JSON.stringify(err);
