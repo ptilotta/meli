@@ -42,28 +42,34 @@ app.post('/mutant', function(req, res) {
     if (!mADN.validaciones()) {
         return res.status(400).json(mADN.mensajeError);
     }
-
     // Llamado a la función Principal, que devuelve False o True si el ADN es Mutante
     mutante = mADN.isMutant();
     console.log(`******* el ADN chequeado es ${mutante}   ********`);
 
-    // Graba registro en MongoDB
-    console.log('*** M U T A N T ***');
-    var mut = new Mutant;
-    await mut.graboMutant(matriz.dna, mutante).then(() => {
-        if (mut.error) {
-            return res.status(400).json(mut.mensaje);
-        }
 
-        // grabo STATS
-        console.log('*** S T A T S ***');
-        var stats = new Stats;
-        stats.graboStats(mutante).then(() => {
-            if (stats.error) {
-                return res.status(400).json(stats.mensaje);
+    let graboMongo = async() => {
+
+        // Graba registro en MongoDB
+        console.log('*** M U T A N T ***');
+        var mut = await new Mutant;
+        await mut.graboMutant(matriz.dna, mutante).then(() => {
+
+            if (mut.error) {
+                return res.status(400).json(mut.mensaje);
             }
+
+            // grabo STATS
+            console.log('*** S T A T S ***');
+            var stats = await new Stats;
+            await stats.graboStats(mutante).then(() => {
+                if (stats.error) {
+                    return res.status(400).json(stats.mensaje);
+                }
+            });
         });
-    });
+    };
+
+    graboMongo();
 
     // Envío respuesta al Navegador
     if (mutante) {
