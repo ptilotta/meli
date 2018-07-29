@@ -10,50 +10,41 @@ class Mutant {
         this.mensaje = {};
     }
 
-    async graboMutant(adn, mutante) {
+    graboMutant(adn, mutante) {
+        return new promisse((resolve, reject) => {
 
-        let procesar = async() => {
             console.log('1. Inicio GraboMutant');
-            let mongoMutant = await new Mongo(process.env.MongoURI);
-            await mongoMutant.Connect();
+            let mongoMutant = new Mongo(process.env.MongoURI);
+            mongoMutant.Connect().then(() => {
 
-            console.log('2. Terminó de hacer el Connect()');
-            if (mongoMutant.error === true) {
-                this.error = true;
-                this.mensaje = mongoMutant.mensaje;
-                return;
-            }
+                console.log('2. Terminó de hacer el Connect()');
 
-            // Seteo Schema MUTANT
-            console.log('3. Voy a crear el Schema MUTANT');
-            await mongoMutant.AddSchema('MUTANT', {
-                dna: { type: String, required: [true, 'Campo dna Requerido'] },
-                mutante: { type: Boolean, required: [true, 'Campo mutante Requerido'] }
-            }, process.env.MSGUNIQUE);
+                // Seteo Schema MUTANT
+                console.log('3. Voy a crear el Schema MUTANT');
+                let addSchema = mongoMutant.AddSchema('MUTANT', {
+                    dna: { type: String, required: [true, 'Campo dna Requerido'] },
+                    mutante: { type: Boolean, required: [true, 'Campo mutante Requerido'] }
+                }, process.env.MSGUNIQUE);
 
-            // Grabo los datos en la Base de Datos
-            console.log('4. Antes de ir a Save');
-            await mongoMutant.Save({
-                dna: adn,
-                mutante
+                addSchema.then(() => {
+
+                    // Grabo los datos en la Base de Datos
+                    console.log('4. Antes de ir a Save');
+                    let grabar = mongoMutant.Save({ dna: adn, mutante });
+                    grabar.then(() => {
+                        console.log('5. Despues de ir a Save');
+                        this.error = false;
+                        this.mensaje = {};
+                        resolve(this.mensaje);
+                    }, (err) => {
+                        this.error = true;
+                        this.mensaje = mongoMutant.mensaje;
+                        resolve(err);
+                    })
+                });
             });
-
-            console.log('5. despues de Save');
-            if (mongoMutant.error === true) {
-                console.log('Dio Error mongoMutant.Save !!!', this.mensaje);
-                this.error = true;
-                this.mensaje = mongoMutant.mensaje;
-                return;
-            }
-            console.log('6. Fin de GraboMutant');
-            this.error = false;
-            this.mensaje = {};
-        }
-        procesar().then(() => {
-            console.log('SALIO POR EL THEN');
         });
     }
-
 }
 
 module.exports = Mutant;

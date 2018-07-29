@@ -10,120 +10,117 @@ class Stats {
     }
 
     obtengoStats() {
-        let mongoStats = new Mongo(process.env.MongoURI);
-        if (mongoStats.error) {
-            this.error = true;
-            this.mensaje = mongoStats.mensaje;
-            return;
-        }
+        return new promisse((resolve, reject) => {
 
-        // Seteo Schema
-        mongoStats.AddSchema('STATS', process.env.SCHEMA_STATS, process.env.MSGUNIQUE);
+            let mongoStats = new Mongo(process.env.MongoURI);
+            mongoStats.Connect().then(() => {
 
-        // Leo el primer registro de la colección
+                // Seteo Schema
+                let ad = mongoStats.AddSchema('STATS', process.env.SCHEMA_STATS, process.env.MSGUNIQUE);
+                ad.then(() => {
+                    // Leo el primer registro de la colección
 
-        mongoStats.FindOne();
-        if (mongoStats.error) {
-            this.error = true;
-            this.mensaje = mongoStats.mensaje;
-            return;
-        }
+                    let fo = mmongoStats.FindOne();
+                    fo.then(() => {
+                        this.error = false;
+                        if (!mongoStats.mensaje) {
 
-        this.error = false;
-        if (!mongoStats.mensaje) {
+                            // Registro no existe
+                            this.mensaje = process.env.SIN_REGISTROS;
+                            resolve(this.mensaje);
 
-            // Registro no existe
-            this.mensaje = process.env.SIN_REGISTROS;
-            return;
+                        } else {
 
-        } else {
+                            // Registro de Stats existente
 
-            // Registro de Stats existente
-
-            if (mongoStats.mensaje.humanos > 0) {
-                this.mensaje = {
-                    'count_mutant_dna': mongoStats.mensaje.mutantes,
-                    'count_human_dna': mongoStats.mensaje.humanos,
-                    'ratio': `${ mongoStats.mensaje.mutantes / mongoStats.mensaje.humanos}`
-                };
-            } else {
-                this.mensaje = {
-                    'count_mutant_dna': mongoStats.mensaje.mutantes,
-                    'count_human_dna': mongoStats.mensaje.humanos,
-                    'ratio': `${ mongoStats.mensaje.mutantes}`
-                };
-            }
-        }
-    }
-
-    async graboStats(mutante) {
-        console.log(' ********************* INICIO DE GRABOSTATS *************************** ');
-        let mongoStats = await new Mongo(process.env.MongoURI);
-        mongoStats.Connect().then(() => {
-            if (mongoStats.error) {
+                            if (mongoStats.mensaje.humanos > 0) {
+                                this.mensaje = {
+                                    'count_mutant_dna': mongoStats.mensaje.mutantes,
+                                    'count_human_dna': mongoStats.mensaje.humanos,
+                                    'ratio': `${ mongoStats.mensaje.mutantes / mongoStats.mensaje.humanos}`
+                                };
+                            } else {
+                                this.mensaje = {
+                                    'count_mutant_dna': mongoStats.mensaje.mutantes,
+                                    'count_human_dna': mongoStats.mensaje.humanos,
+                                    'ratio': `${ mongoStats.mensaje.mutantes}`
+                                };
+                            }
+                            resolve(this.mensaje);
+                        }
+                    }, (err) => {
+                        this.error = true;
+                        this.mensaje = mongoStats.mensaje;
+                        reject(this.mensaje);
+                    });
+                }, (err) => {
+                    this.error = true;
+                    this.mensaje = mongoStats.mensaje;
+                    reject(this.mensaje);
+                });
+            }, (err) => {
                 this.error = true;
                 this.mensaje = mongoStats.mensaje;
-                return;
-            }
-            mongoStats.AddSchema('STATS', {
-                id: { type: Number, required: [true, 'Campo ID Requerido'] },
-                humanos: { type: Number, required: [true, 'Campo humanos Requerido'] },
-                mutantes: { type: Number, required: [true, 'Campo mutantes Requerido'] }
-            }, process.env.MSGUNIQUE).then(() => {
+                reject(this.mensaje);
+            });
+        })
+    };
 
-                // Leo el registro unico de Estadisticas
-                mongoStats.FindOne().then(() => {
-                    let registros = Object.keys(mongoStats.resultado).length;
-                    console.log(`Registros de FindOne ${registros}`);
-                    if (registros === 0) {
+    graboStats(mutante) {
+        return new promisse((resolve, reject) => {
+            console.log(' ********************* INICIO DE GRABOSTATS *************************** ');
+            let mongoStats = new Mongo(process.env.MongoURI);
+            let connect = mongoStats.Connect();
+            connect.then(() => {
+                let ad = mongoStats.AddSchema('STATS', {
+                    id: { type: Number, required: [true, 'Campo ID Requerido'] },
+                    humanos: { type: Number, required: [true, 'Campo humanos Requerido'] },
+                    mutantes: { type: Number, required: [true, 'Campo mutantes Requerido'] }
+                }, process.env.MSGUNIQUE);
+                ad.then(() => {
 
-                        // Si el registro no existe, crea uno
-                        mongoStats.Save({
-                            id: 1,
-                            humanos: 0,
-                            mutantes: 0
-                        }).then(() => {
-                            if (mongoStats.error) {
+                    // Leo el registro unico de Estadisticas
+                    let fo = mongoStats.FindOne();
+                    fo.then(() => {
+                        let registros = Object.keys(mongoStats.resultado).length;
+                        console.log(`Registros de FindOne ${registros}`);
+                        if (registros === 0) {
+
+                            // Si el registro no existe, crea uno
+                            let sa = mongoStats.Save({ id: 1, humanos: 0, mutantes: 0 });
+                            sa.then(() => {
+                                if (mutante) {
+                                    let up = mongoStats.Update({ id: 1, $inc: { mutantes: 1 } });
+                                } else {
+                                    let up = mongoStats.Update({ id: 1, $inc: { humanos: 1 } });
+                                }
+                            }, (err) => {
                                 this.error = true;
                                 this.mensaje = mongoStats.mensaje;
-                                return;
-                            }
-                            if (mutante) {
-                                mongoStats.Update({
-                                    id: 1,
-                                    $inc: { mutantes: 1 }
-                                });
-                            } else {
-                                mongoStats.Update({
-                                    id: 1,
-                                    $inc: { humanos: 1 }
-                                });
-                            }
-                        });
-                    } else {
-                        if (mutante) {
-                            mongoStats.Update({
-                                id: 1,
-                                $inc: { mutantes: 1 }
+                                reject(this.mensaje);
                             });
+
                         } else {
-                            mongoStats.Update({
-                                id: 1,
-                                $inc: { humanos: 1 }
-                            });
+                            if (mutante) {
+                                let up = mongoStats.Update({ id: 1, $inc: { mutantes: 1 } });
+                            } else {
+                                let up = mongoStats.Update({ id: 1, $inc: { humanos: 1 } });
+                            }
                         }
-
-                    }
-                    console.log(' ********************* FIN DE GRABOSTATS *************************** ');
-
+                        console.log(' ********************* FIN DE GRABOSTATS *************************** ');
+                    }, (err) => {
+                        this.error = true;
+                        this.mensaje = mongoStats.mensaje;
+                        reject(this.mensaje);
+                    });
+                }, (err) => {
+                    this.error = true;
+                    this.mensaje = mongoStats.mensaje;
+                    reject(this.mensaje);
                 });
-
             });
-
         });
-
-
-    }
+    };
 }
 
 module.exports = Stats;

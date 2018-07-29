@@ -47,27 +47,32 @@ app.post('/mutant', function(req, res) {
     console.log(`******* el ADN chequeado es ${mutante}   ********`);
 
 
-    let graboMutant = async() => {
-
-        // Graba registro en MongoDB
-        console.log('*** M U T A N T ***');
-        var mut = await new Mutant;
-        await mut.graboMutant(matriz.dna, mutante);
-        if (mut.error) {
-            return res.status(400).json(mut.mensaje);
-        };
-
+    let graboMutant = () => {
+        return new promisse((resolve, reject) => {
+            // Graba registro en MongoDB
+            console.log('*** M U T A N T ***');
+            var mut = new Mutant;
+            let gm = mut.graboMutant(matriz.dna, mutante);
+            gm.then(() => {
+                resolve(mut.mensaje);
+            }, (err) => {
+                reject(res.status(400).json(mut.mensaje));
+            });
+        });
     };
 
-    let graboStats = async() => {
-        // grabo STATS
-        console.log('*** S T A T S ***');
-        var stats = await new Stats;
-        await stats.graboStats(mutante);
-
-        if (stats.error) {
-            return res.status(400).json(stats.mensaje);
-        }
+    let graboStats = () => {
+        return new promisse((resolve, reject) => {
+            // grabo STATS
+            console.log('*** S T A T S ***');
+            var stats = new Stats;
+            let gs = stats.graboStats(mutante);
+            gs.then(() => {
+                resolve(stats.mensaje);
+            }, (err) => {
+                reject(res.status(400).json(stats.mensaje));
+            });
+        });
     };
 
 
