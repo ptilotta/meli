@@ -55,15 +55,15 @@ app.post('/mutant', function(req, res) {
         if (mut.error) {
             return res.status(400).json(mut.mensaje);
         }
-    });
 
-    // grabo STATS
-    console.log('*** S T A T S ***');
-    var stats = new Stats;
-    stats.graboStats(mutante).then(() => {
-        if (stats.error) {
-            return res.status(400).json(stats.mensaje);
-        }
+        // grabo STATS
+        console.log('*** S T A T S ***');
+        var stats = new Stats;
+        stats.graboStats(mutante).then(() => {
+            if (stats.error) {
+                return res.status(400).json(stats.mensaje);
+            }
+        });
     });
 
     // Envío respuesta al Navegador
