@@ -126,7 +126,7 @@ class Mongo {
         console.log('=====================================');
         try {
             console.log('Entre en Update');
-            await modelo.update(instruccion);
+            await this.modelo.update(instruccion);
             this.error = false;
             this.mensaje = {};
         } catch (error) {
