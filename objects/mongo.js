@@ -99,8 +99,8 @@ class Mongo {
             }
         } catch (error) {
             this.error = true;
-            this.mensaje = JSON.stringify(err);
-            console.log('Hubo Error en FINDONE', err);
+            this.mensaje = JSON.stringify(error);
+            console.log('Hubo Error en FINDONE', error);
             return;
         }
     };
