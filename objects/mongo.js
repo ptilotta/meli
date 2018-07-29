@@ -108,8 +108,6 @@ class Mongo {
 
         try {
             let registro = await this.modelo.findOne();
-
-            console.log(` EL RESULTADO DE FINDONE ES ${registro}`);
             if (registro) {
                 this.resultado = registro;
             } else {
@@ -128,7 +126,7 @@ class Mongo {
         console.log('=====================================');
         try {
             console.log('Entre en Update');
-            await modelo.update();
+            await modelo.update(instruccion);
             this.error = false;
             this.mensaje = {};
         } catch (error) {
