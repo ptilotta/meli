@@ -35,7 +35,7 @@ process.env.REGISTRO_VACIO = {
 // Define el Schema para el servicio Mutants
 
 process.env.SCHEMA_MUTANT = {
-    dna: { type: String, required: [true, 'Campo dna Requerido'] },
+    dna: { type: String, required: [true, 'Campo dna Requerido'], unique: true },
     mutante: { type: Boolean, required: [true, 'Campo mutante Requerido'] }
 };
 

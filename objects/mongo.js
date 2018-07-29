@@ -36,13 +36,11 @@ class Mongo {
 
         try {
             var esquema = new mch(Schema);
-            console.log(`nombre = ${nombre} esquema=${esquema}`);
             esquema.plugin(uniqueValidator, { message: uniqueMsg });
             this.modelo = mongoose.model(nombre, esquema);
             this.mensaje = {};
             this.error = false;
         } catch (error) {
-            console.log(`El Error en AddSchema (2) es ${error}`);
             this.mensaje = error;
             this.error = true;
         }
@@ -68,10 +66,6 @@ class Mongo {
     };
 
     async Save(datos) {
-        console.log('=====================================');
-        console.log('           SAVE                      ');
-        console.log('=====================================');
-
         if (this.modelo === undefined) {
             this.error = true;
             this.mensaje = JSON.stringify({
@@ -90,7 +84,6 @@ class Mongo {
             // Chequea que el error generado no sea por campo duplicado
             // y de ser un error real, devuelve el status y el mensaje
             if (!error.message.includes(this.uniqueMsg)) {
-                console.log(`ERROR EN SAVE : ${error} this.uniqueMsg=${this.uniqueMsg}`);
                 this.error = true;
                 this.mensaje = JSON.stringify(error);
             } else {
@@ -102,10 +95,6 @@ class Mongo {
 
 
     async FindOne() {
-        console.log('=====================================');
-        console.log('           FINDONE                   ');
-        console.log('=====================================');
-
         try {
             let registro = await this.modelo.findOne();
             if (registro) {
@@ -116,21 +105,15 @@ class Mongo {
         } catch (error) {
             this.error = true;
             this.mensaje = JSON.stringify(error);
-            console.log('Hubo Error en FINDONE', error);
         }
     };
 
     async Update(instruccion) {
-        console.log('=====================================');
-        console.log('           UPDATE                    ');
-        console.log('=====================================');
         try {
-            console.log('Entre en Update');
             await this.modelo.update(instruccion);
             this.error = false;
             this.mensaje = {};
         } catch (error) {
-            console.log(`Dio error Update ${error}`);
             this.error = true;
             this.mensaje = JSON.stringify(error);
         }

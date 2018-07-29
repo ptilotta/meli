@@ -15,7 +15,6 @@ class Mutant {
         this.error = false;
         this.mensaje = {};
 
-        console.log('1. Inicio GraboMutant');
         let mongoMutant = new Mongo(process.env.MongoURI);
         await mongoMutant.Connect();
         if (mongoMutant.error) {
@@ -23,29 +22,25 @@ class Mutant {
             this.mensaje = mongoMutant.mensaje;
             return;
         }
-        console.log('2. Terminó de hacer el Connect()');
 
         // Seteo Schema MUTANT
-        console.log('3. Voy a crear el Schema MUTANT');
-        await mongoMutant.AddSchema('MUTANT', {
-            dna: { type: String, required: [true, 'Campo dna Requerido'], unique: true },
-            mutante: { type: Boolean, required: [true, 'Campo mutante Requerido'] }
-        }, process.env.MSGUNIQUE);
+        /*        await mongoMutant.AddSchema('MUTANT', {
+                    dna: { type: String, required: [true, 'Campo dna Requerido'], unique: true },
+                    mutante: { type: Boolean, required: [true, 'Campo mutante Requerido'] }
+                }, process.env.MSGUNIQUE); */
+
+        await mongoMutant.AddSchema('MUTANT', process.env.SCHEMA_MUTANT, process.env.MSGUNIQUE);
+
 
 
         // Grabo los datos en la Base de Datos
-        console.log('4. Antes de ir a Save');
         await mongoMutant.Save({ dna: adn, mutante });
         if (mongoMutant.error) {
             this.error = true;
             this.mensaje = mongoMutant.mensaje;
-            return;
         }
-
-        console.log('5. Despues de ir a Save');
         return;
     };
 }
-
 
 module.exports = Mutant;
