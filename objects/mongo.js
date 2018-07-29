@@ -66,6 +66,7 @@ class Mongo {
         console.log('=====================================');
 
         if (this.modelo === undefined) {
+            console.log('me fui por aca');
             this.error = true;
             this.mensaje = JSON.stringify({
                 mensaje: 'Schema no definido, debe usar el método AddSchema'
@@ -74,7 +75,7 @@ class Mongo {
         }
 
         try {
-            let sch = await new this.modelo(datos);
+            let sch = new this.modelo(datos);
             await sch.save();
             this.error = false;
             this.mensaje = {};
