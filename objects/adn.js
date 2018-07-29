@@ -23,7 +23,6 @@ class Adn {
 
         // Creo la matriz desde el JSON recibido
         for (var i in adn) {
-            console.log(adn[i]);
             this.tabla.push(adn[i]);
         }
     }
@@ -78,7 +77,6 @@ class Adn {
 
     isMutant() {
 
-        console.log(`Ocurrencias necesarias = ${this.ocurrencias}`);
         this.recorroMatriz("H", 0, 0, 0, 0); // Recorrido Horizontal
         if (this.camposMutantes >= this.ocurrencias) { return true; }
 
@@ -124,6 +122,7 @@ class Adn {
                     contador = 1;
                 }
                 if (contador === this.largoString) {
+                    console.log(`largo String ${this.largoString}`);
                     this.camposMutantes += 1;
                     if (this.camposMutantes >= this.ocurrencias) {
                         return;
