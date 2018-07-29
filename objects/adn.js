@@ -77,15 +77,19 @@ class Adn {
 
     isMutant() {
 
+        console.log('---------------- HORIZONTAL ---------------------');
         this.recorroMatriz("H", 0, 0, 0, 0); // Recorrido Horizontal
         if (this.camposMutantes >= this.ocurrencias) { return true; }
 
+        console.log('---------------- VERTICAL ---------------------');
         this.recorroMatriz("V", 0, 0, 0, 0); // Recorrido Vertical
         if (this.camposMutantes >= this.ocurrencias) { return true; }
 
+        console.log('---------------- DIAGONAL I>D ---------------------');
         this.recorroMatriz("D", 0, 0, 1, 1); // Recorrido Diagonal - Derecha a Izquierda
         if (this.camposMutantes >= this.ocurrencias) { return true; }
 
+        console.log('---------------- DIAGONAL D>I ---------------------');
         this.recorroMatriz("D", 0, 0, 1, -1); // Recorrido Diagonal - Izquierda a Derecha 
         if (this.camposMutantes >= this.ocurrencias) { return true; }
 
@@ -122,7 +126,6 @@ class Adn {
                     contador = 1;
                 }
                 if (contador === this.largoString) {
-                    console.log(`largo String ${this.largoString}`);
                     this.camposMutantes += 1;
                     if (this.camposMutantes >= this.ocurrencias) {
                         return;
