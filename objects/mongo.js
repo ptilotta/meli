@@ -95,6 +95,7 @@ class Mongo {
                 console.log('Hubo Error en FINDONE', err);
                 return;
             }
+            console.log(` EL RESULTADO DE FINDONE ES ${res}`);
             if (!res === null) {
                 this.resultado = res;
             } else {
