@@ -97,7 +97,7 @@ class Adn {
     }
 
     recorroMatriz(tipo, desde, desde2, incrementoFila, incrementoColumna) {
-        let contador = 1,
+        var contador = 1,
             x, y, actual_y, actual_x, iteroporFila = false,
             ultCaracter = '',
             t, iterar = true;
@@ -120,6 +120,7 @@ class Adn {
             while (iterar) {
                 t = this.tabla[y].substr((x + 1), 1);
                 if (ultCaracter === t) {
+                    console.log(`ultCaracter = ${ultCaracter} t = ${t}`);
                     contador += 1;
                 } else {
                     ultCaracter = t;
