@@ -52,7 +52,7 @@ app.post('/mutant', function(req, res) {
         var mut = await new Mutant;
         await mut.graboMutant(matriz.dna, mutante);
         if (mut.error) {
-            res.status(400).json(mut.mensaje);
+            return res.status(400).json(mut.mensaje);
         };
 
         // grabo registro en MongoDB de STATS
@@ -60,7 +60,7 @@ app.post('/mutant', function(req, res) {
         var stats = await new Stats;
         await stats.graboStats(mutante);
         if (mut.error) {
-            res.status(400).json(stats.mensaje);
+            return res.status(400).json(stats.mensaje);
         };
     };
 
