@@ -62,15 +62,16 @@ app.post('/mutant', function(req, res) {
         if (mut.error) {
             return res.status(400).json(stats.mensaje);
         };
+
+        // Envío respuesta al Navegador
+        if (mutante) {
+            return res.status(200).json();
+        } else {
+            return res.status(403).json();
+        }
     };
 
     graboInfo();
 
-    // Envío respuesta al Navegador
-    if (mutante) {
-        return res.status(200).json();
-    } else {
-        return res.status(403).json();
-    }
 });
 module.exports = app;
