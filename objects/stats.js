@@ -37,7 +37,7 @@ class Stats {
         };
 
         // Chequeo si había registro de Totales ya creado
-        if (!mongoStats.mensaje) {
+        if (!mongoStats.resultado) {
             this.error = false;
 
             // Registro no existe
@@ -49,7 +49,7 @@ class Stats {
         } else {
 
             // Registro de Stats existente
-            var resultado = mongoStats.mensaje;
+            var resultado = mongoStats.resultado;
             console.log(`${resultado.humanos}`);
             if (resultado.humanos > 0) {
                 console.log(`envio humanos + mutantes ( mutantes = ${resultado.mutantes}, humanos = ${resultado.humanos}) `);
