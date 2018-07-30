@@ -49,6 +49,7 @@ class Stats {
         } else {
 
             // Registro de Stats existente
+            console.log(`${mongoStats.mensaje}`);
             if (mongoStats.humanos > 0) {
                 console.log(`envio humanos + mutantes ( mutantes = ${mongoStats.mutantes}, humanos = ${mongoStats.humanos}) `);
                 this.mensaje = {
