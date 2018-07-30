@@ -51,6 +51,7 @@ class Stats {
             // Registro de Stats existente
             console.log(`${JSON.parse(mongoStats.resultado)}`);
             var rdo = JSON.parse(mongoStats.resultado);
+            var rdo = mongoStats.resultado;
             if (rdo['humanos'] > 0) {
                 console.log(`envio humanos + mutantes ( mutantes = ${rdo['mutantes']}, humanos = ${rdo['humanos']}) `);
                 this.mensaje = {
@@ -62,7 +63,7 @@ class Stats {
                 console.log(`envio humanos + mutantes ( mutantes = ${rdo['mutantes']}) `);
                 this.mensaje = {
                     'count_mutant_dna': rdo['mutantes'],
-                    'count_human_dna': rdo['mutantes'],
+                    'count_human_dna': rdo['humanos'],
                     'ratio': `${ rdo['mutantes']}`
                 };
             }
