@@ -100,8 +100,7 @@ class Mongo {
         try {
             let registro = await this.modelo.findOne();
             if (registro) {
-                console.log(`registro es ${registro}`);
-                this.resultado = registro;
+                this.resultado = JSON.stringify(registro);
             } else {
                 this.resultado = {};
             }
