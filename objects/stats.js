@@ -50,7 +50,7 @@ class Stats {
 
             // Registro de Stats existente
             var resultado = mongoStats.mensaje;
-            console.log(`${resultado}`);
+            console.log(`${resultado.humanos}`);
             if (resultado.humanos > 0) {
                 console.log(`envio humanos + mutantes ( mutantes = ${resultado.mutantes}, humanos = ${resultado.humanos}) `);
                 this.mensaje = {
