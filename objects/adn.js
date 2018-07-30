@@ -118,7 +118,7 @@ class Adn {
             ultCaracter = "";
             iterar = true;
             while (iterar) {
-                t = this.tabla[y].substr((x + 1), 1);
+                t = this.tabla[y].substr(x, 1);
                 console.log(`this.tabla[y] = ${this.tabla[y]} y = ${y} x = ${x} tipo = ${tipo} t=${t}`);
                 if (ultCaracter === t) {
                     contador += 1;
