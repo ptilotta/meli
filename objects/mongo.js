@@ -47,8 +47,6 @@ class Mongo {
         }
     };
 
-
-
     async Connect() {
 
         /* Conecta a la Base de Mongo */
@@ -101,8 +99,8 @@ class Mongo {
     async FindOne() {
         try {
             let registro = await this.modelo.findOne();
-            console.log(`${registro}`);
             if (registro) {
+                console.log(`registro es ${registro}`);
                 this.resultado = registro;
             } else {
                 this.resultado = {};
