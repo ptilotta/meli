@@ -37,7 +37,7 @@ class Stats {
         };
 
         // Chequeo si había registro de Totales ya creado
-        if (!mongoStats.resultado) {
+        if (Object.keys(mongoStats.resultado).length === 0) {
             this.error = false;
 
             // Registro no existe
@@ -49,7 +49,6 @@ class Stats {
         } else {
 
             // Registro de Stats existente
-            console.log(mongoStats.resultado);
             var rdo = JSON.parse(mongoStats.resultado);
             if (rdo['humanos'] > 0) {
                 this.mensaje = {
