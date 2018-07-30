@@ -49,6 +49,7 @@ class Stats {
         } else {
 
             // Registro de Stats existente
+            console.log(mongoStats.resultado);
             var rdo = JSON.parse(mongoStats.resultado);
             if (rdo['humanos'] > 0) {
                 this.mensaje = {
