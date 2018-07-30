@@ -49,21 +49,20 @@ class Stats {
         } else {
 
             // Registro de Stats existente
-            var resultado = mongoStats.resultado;
-            console.log(`${resultado.humanos}`);
-            if (resultado.humanos > 0) {
-                console.log(`envio humanos + mutantes ( mutantes = ${resultado.mutantes}, humanos = ${resultado.humanos}) `);
+            console.log(`${mongoStats.resultado.humanos}`);
+            if (mongoStats.resultado.humanos > 0) {
+                console.log(`envio humanos + mutantes ( mutantes = ${mongoStats.resultado.mutantes}, humanos = ${mongoStats.resultado.humanos}) `);
                 this.mensaje = {
-                    'count_mutant_dna': resultado.mutantes,
-                    'count_human_dna': resultado.humanos,
-                    'ratio': `${ resultado.mutantes / resultado.humanos}`
+                    'count_mutant_dna': mongoStats.resultado.mutantes,
+                    'count_human_dna': mongoStats.resultado.humanos,
+                    'ratio': `${ mongoStats.resultado.mutantes / mongoStats.resultado.humanos}`
                 };
             } else {
-                console.log(`envio humanos + mutantes ( mutantes = ${resultado.mutantes}) `);
+                console.log(`envio humanos + mutantes ( mutantes = ${mongoStats.resultado.mutantes}) `);
                 this.mensaje = {
-                    'count_mutant_dna': resultado.mutantes,
-                    'count_human_dna': resultado.humanos,
-                    'ratio': `${ resultado.mutantes}`
+                    'count_mutant_dna': mongoStats.resultado.mutantes,
+                    'count_human_dna': mongoStats.resultado.humanos,
+                    'ratio': `${ mongoStats.resultado.mutantes}`
                 };
             }
         }
