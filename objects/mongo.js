@@ -101,6 +101,7 @@ class Mongo {
     async FindOne() {
         try {
             let registro = await this.modelo.findOne();
+            console.log(`${registro}`);
             if (registro) {
                 this.resultado = registro;
             } else {
