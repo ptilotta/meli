@@ -49,21 +49,21 @@ class Stats {
         } else {
 
             // Registro de Stats existente
-            console.log(`${JSON.stringify(mongoStats.resultado)}`);
-            var rdo = JSON.stringify(mongoStats.resultado);
-            if (rdo[0].humanos > 0) {
-                console.log(`envio humanos + mutantes ( mutantes = ${rdo[0].mutantes}, humanos = ${rdo[0].humanos}) `);
+            console.log(`${JSON.parse(mongoStats.resultado)}`);
+            var rdo = JSON.parse(mongoStats.resultado);
+            if (rdo['humanos'] > 0) {
+                console.log(`envio humanos + mutantes ( mutantes = ${rdo['mutantes']}, humanos = ${rdo['humanos']}) `);
                 this.mensaje = {
-                    'count_mutant_dna': rdo[0].mutantes,
-                    'count_human_dna': rdo[0].humanos,
-                    'ratio': `${ rdo[0].mutantes / rdo[0].humanos}`
+                    'count_mutant_dna': rdo['mutantes'],
+                    'count_human_dna': rdo['humanos'],
+                    'ratio': `${ rdo['mutantes'] / rdo['humanos']}`
                 };
             } else {
-                console.log(`envio humanos + mutantes ( mutantes = ${rdo[0].mutantes}) `);
+                console.log(`envio humanos + mutantes ( mutantes = ${rdo['mutantes']}) `);
                 this.mensaje = {
-                    'count_mutant_dna': rdo[0].mutantes,
-                    'count_human_dna': rdo[0].humanos,
-                    'ratio': `${ rdo[0].mutantes}`
+                    'count_mutant_dna': rdo['mutantes'],
+                    'count_human_dna': rdo['mutantes'],
+                    'ratio': `${ rdo['mutantes']}`
                 };
             }
         }
